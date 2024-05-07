@@ -25,9 +25,9 @@ func _process(_delta: float) -> void:
 
 
 func _get_time() -> String:
-	var min: int = int(level_timer.time_left / 60.0)
-	var sec: int = int(level_timer.time_left) % 60
-	return str(min) + ":" + str(sec)
+	var minutes: int = int(level_timer.time_left / 60.0)
+	var seconds: int = int(level_timer.time_left) % 60
+	return str(minutes) + ":" + str(seconds)
 
 func enemy_spawner():
 	var enemy = ENEMY.instantiate()
