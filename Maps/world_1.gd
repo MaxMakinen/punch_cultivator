@@ -35,6 +35,7 @@ func enemy_spawner():
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	var spawn_dir : Vector2 = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
 	enemy.position = player.position + spawn_dir.normalized() * 400
+	enemy.set_target(player)
 	add_child(enemy)
 	await get_tree().create_timer(2.0).timeout
 	spawning = false
