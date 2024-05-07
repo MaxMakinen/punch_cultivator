@@ -3,9 +3,6 @@ extends CharacterBody2D
 
 @export var speed = 300
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -13,20 +10,6 @@ func _get_input():
 
 
 func _physics_process(delta: float) -> void:
-#	# Add the gravity.
-#	if not is_on_floor():
-#		velocity.y += gravity * delta
 
-#	# Handle jump.
-#	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-#		velocity.y = JUMP_VELOCITY
-
-#	# Get the input direction and handle the movement/deceleration.
-#	# As good practice, you should replace UI actions with custom gameplay actions.
-#	var direction := Input.get_axis("ui_left", "ui_right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
 	_get_input()
 	move_and_slide()
