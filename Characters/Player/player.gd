@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = 300
+@export var speed = 400
 @onready var hurt_box: Area2D = $HurtBox
 
 
