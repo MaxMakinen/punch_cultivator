@@ -12,6 +12,6 @@ func _choose_direction() -> void:
 	var direction: Vector2 = target.position - self.position
 	velocity = direction.normalized() * SPEED
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_choose_direction()
 	move_and_slide()
