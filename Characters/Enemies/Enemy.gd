@@ -15,3 +15,7 @@ func _choose_direction() -> void:
 func _physics_process(_delta: float) -> void:
 	_choose_direction()
 	move_and_slide()
+
+func get_attacked() -> bool:
+	
+	return false
