@@ -23,7 +23,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 func _on_punch_box_area_entered(area: Area2D) -> void:
 	var punch = PUNCHPLOSION.instantiate()
-	punch.position = area.position
+	punch.position = area.global_position
 	add_child(punch)
 
 
