@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://e2460g72ky24"]
+
+[ext_resource type="Texture2D" uid="uid://b880byxhh6xbo" path="res://assets/Weapons/DAGGERS.png" id="1_uy0rq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fe4dx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svdct"]
+atlas = ExtResource("1_uy0rq")
+region = Rect2(0, 0, 30, 30)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fe4dx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_svdct")
