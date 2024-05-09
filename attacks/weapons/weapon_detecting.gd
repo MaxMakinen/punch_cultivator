@@ -23,6 +23,13 @@ func _process(_delta: float) -> void:
 func _aim(direction: Vector2) -> void:
 	dir = direction.normalized()
 
+
+func _on_target_detection_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		_aim(body.position - self.position)
+		shoot()
+
+
 func shoot() -> void:
 	if cooldown_timer.is_stopped():
 		var b = projectile.instantiate()
@@ -31,9 +38,5 @@ func shoot() -> void:
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
 
-
-func _on_target_detection_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		_aim(body.position - self.position)
-		shoot()
-
+func get_cooldown() -> float:
+	return cooldown_timer.time_left
