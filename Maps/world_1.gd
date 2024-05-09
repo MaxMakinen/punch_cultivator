@@ -14,7 +14,6 @@ func _ready() -> void:
 	level_timer.start(time * 60)
 
 
-
 func _process(_delta: float) -> void:
 	timer_label.text = _get_time()
 	if !spawning:
@@ -23,11 +22,11 @@ func _process(_delta: float) -> void:
 		print("SPAWN")
 
 
-
 func _get_time() -> String:
 	var minutes: int = int(level_timer.time_left / 60.0)
 	var seconds: int = int(level_timer.time_left) % 60
 	return str(minutes) + ":" + str(seconds)
+
 
 func enemy_spawner():
 	var enemy = ENEMY.instantiate()
