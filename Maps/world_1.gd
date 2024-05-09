@@ -27,7 +27,7 @@ func _get_time() -> String:
 	var seconds: int = int(level_timer.time_left) % 60
 	return str(minutes) + ":" + str(seconds)
 
-
+# TODO: Needs to be it's own better thing
 func enemy_spawner():
 	var enemy = ENEMY.instantiate()
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
