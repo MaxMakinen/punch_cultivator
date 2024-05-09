@@ -5,6 +5,7 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 
 @export var time: int = 30
+@export var hostile: PackedScene = null
 
 const ENEMY = preload("res://characters/Enemies/Enemy.tscn")
 var spawning: bool = false
@@ -29,7 +30,11 @@ func _get_time() -> String:
 
 # TODO: Needs to be it's own better thing
 func enemy_spawner():
-	var enemy = ENEMY.instantiate()
+	var enemy
+	if hostile == null:
+		enemy = ENEMY.instantiate()
+	else:
+		enemy = hostile.instantiate()
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	var spawn_dir : Vector2 = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
 	enemy.position = player.position + spawn_dir.normalized() * 400

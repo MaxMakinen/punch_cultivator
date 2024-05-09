@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqoh3q1s6e336"]
 
-[ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://assets/icon.svg" id="1_8otgw"]
 [ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_68e6m"]
 [ext_resource type="PackedScene" uid="uid://cqthcjdpye8og" path="res://attacks/bullet.tscn" id="2_m8wte"]
+[ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://assets/icon.svg" id="3_mufwu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5a38j"]
 radius = 65.0077
@@ -20,7 +20,7 @@ script = ExtResource("1_68e6m")
 Bullet = ExtResource("2_m8wte")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_8otgw")
+texture = ExtResource("3_mufwu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5a38j")
