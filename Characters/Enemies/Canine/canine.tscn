@@ -57,7 +57,7 @@ animations = [{
 radius = 11.0
 height = 42.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Canine" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_twew1")
