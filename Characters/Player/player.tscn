@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ohy1r1benklk"]
+[gd_scene load_steps=7 format=3 uid="uid://cqoh3q1s6e336"]
 
 [ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://icon.svg" id="1_8otgw"]
 [ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_68e6m"]
+[ext_resource type="PackedScene" uid="uid://cqthcjdpye8og" path="res://attacks/bullet.tscn" id="2_m8wte"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5a38j"]
 radius = 65.0077
@@ -12,10 +13,11 @@ radius = 65.0308
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7lnm"]
 radius = 142.127
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_68e6m")
+Bullet = ExtResource("2_m8wte")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8otgw")
@@ -31,11 +33,15 @@ collision_mask = 16
 shape = SubResource("CircleShape2D_tbxrp")
 
 [node name="PunchBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchBox"]
 shape = SubResource("CircleShape2D_s7lnm")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(0, -65)
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="PunchBox" to="." method="_on_punch_box_area_entered"]
