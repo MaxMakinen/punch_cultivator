@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Punch Cultivator"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [autoload]
 
@@ -60,4 +60,5 @@ down={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

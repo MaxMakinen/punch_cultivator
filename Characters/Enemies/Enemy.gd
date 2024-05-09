@@ -1,8 +1,8 @@
 extends CharacterBody2D
-class_name Enemy
+#class_name HostileEntity
 
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 300.0
 

@@ -31,7 +31,7 @@ func shoot() -> void:
 	if cooldown_timer.is_stopped():
 		var b = projectile.instantiate()
 		look_at(self.global_position + dir)
-		get_parent().get_parent().add_child(b)
+		get_parent().call_deferred("add_sibling", b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
 

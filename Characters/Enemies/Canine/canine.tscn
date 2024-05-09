@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfoe7iyc7v1ne"]
+
+[ext_resource type="Script" path="res://characters/Enemies/enemy.gd" id="1_twew1"]
+[ext_resource type="Texture2D" uid="uid://ccnib04y0yl2x" path="res://assets/Canines/Canine_Gray_Run.png" id="2_fwl2h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18akj"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20egk"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1fo6"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jayy0"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0utnp"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87mn6"]
+atlas = ExtResource("2_fwl2h")
+region = Rect2(48, 32, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0b8pe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18akj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20egk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1fo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jayy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0utnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87mn6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojvvm"]
+radius = 11.0
+height = 42.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_twew1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_0b8pe")
+frame_progress = 0.238662
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_ojvvm")

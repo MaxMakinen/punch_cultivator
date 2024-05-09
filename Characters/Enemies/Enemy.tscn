@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cda8xdcol5n4g"]
+[gd_scene load_steps=5 format=3 uid="uid://cda8xdcol5n4g"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/Enemy.gd" id="1_di073"]
 [ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://assets/icon.svg" id="2_x2kv0"]
@@ -17,31 +17,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_5a38j"]
 radius = 61.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_48c5x"]
-radius = 65.0308
-
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_di073")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.368627, 0.486275, 1)
 sprite_frames = SubResource("SpriteFrames_7q2lx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5a38j")
-
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 16
-
-[node name="HurtBoxCollision" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_48c5x")
-
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 8
-
-[node name="HitBoxCollision" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_48c5x")
