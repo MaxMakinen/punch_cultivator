@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-const SPEED = 300.0
+const SPEED = 250.0
 
 var health: int = 5
 var target: CharacterBody2D = self
