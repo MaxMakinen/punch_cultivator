@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cqthcjdpye8og" path="res://attacks/bullet.tscn" id="2_pgdy4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lrgyo"]
-radius = 200.0
+radius = 90.0
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_2dmlv")
