@@ -39,7 +39,3 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	print("PAIN")
 	pass # Replace with function body.
 
-
-func _on_punch_box_area_entered(area: Area2D) -> void:
-	if area.owner != self:
-		area.owner.get_attacked(Global.punch)
