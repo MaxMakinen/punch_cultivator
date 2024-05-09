@@ -1,10 +1,8 @@
 extends CharacterBody2D
-#class_name HostileEntity
-
 
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const SPEED = 300.0
+const SPEED = 250.0
 
 var health: int = 5
 var target: CharacterBody2D = self
@@ -19,7 +17,10 @@ func _choose_direction() -> void:
 	if hurt == false:
 		direction = target.position - self.position
 	velocity = direction.normalized() * SPEED
-
+	if direction.x > 0:
+		sprite_2d.flip_h = true
+	else:
+		sprite_2d.flip_h = false
 
 func _physics_process(_delta: float) -> void:
 	_choose_direction()
@@ -28,20 +29,21 @@ func _physics_process(_delta: float) -> void:
 
 func _take_damage(damage: int) -> void:
 	health -= damage
+
+
+func _check_health() -> void:
 	if health <= 0:
 		queue_free()
-
+	hurt = false
 
 func get_attacked(attack: Dictionary) -> bool:
-	var punch = attack["scene"].instantiate()
-	#var punch = Global.PUNCHPLOSION.instantiate()
-	punch.position = self.global_position
-	print("ENEMY POS: ", self.position, " PUNCH POS: ", punch.position)
-	add_child(punch)
-	sprite_2d.modulate = Color.WHITE
 	hurt = true
-	await get_tree().create_timer(0.5).timeout
 	_take_damage(attack["damage"])
-#	queue_free()
+	sprite_flash()
+	await get_tree().create_timer(0.25).timeout
+	_check_health()
 	return true
-	return false
+
+func sprite_flash() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(sprite_2d, "modulate:v", 1, 0.25).from(15)
