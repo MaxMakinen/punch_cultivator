@@ -1,7 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cda8xdcol5n4g"]
+[gd_scene load_steps=6 format=3 uid="uid://cda8xdcol5n4g"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/Enemy.gd" id="1_di073"]
-[ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://icon.svg" id="1_i387e"]
+[ext_resource type="Texture2D" uid="uid://y2leuapg5ql" path="res://assets/icon.svg" id="2_x2kv0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7q2lx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x2kv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5a38j"]
 radius = 61.0
@@ -14,9 +25,9 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_di073")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.368627, 0.486275, 1)
-texture = ExtResource("1_i387e")
+sprite_frames = SubResource("SpriteFrames_7q2lx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5a38j")
