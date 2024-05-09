@@ -37,4 +37,6 @@ func enemy_spawner():
 	add_child(enemy)
 	await get_tree().create_timer(2.0).timeout
 	spawning = false
-	
+
+func spawn_shit(shit) -> void:
+	add_child(shit)
