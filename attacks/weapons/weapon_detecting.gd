@@ -1,3 +1,4 @@
+class_name WeaponDetecting
 extends Node2D
 
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+
 func _aim(direction: Vector2) -> void:
 	dir = direction.normalized()
 
@@ -37,6 +39,7 @@ func shoot() -> void:
 		get_parent().call_deferred("add_sibling", b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
+
 
 func get_cooldown() -> float:
 	return cooldown_timer.time_left

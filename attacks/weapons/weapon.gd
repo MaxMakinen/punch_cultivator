@@ -1,3 +1,4 @@
+class_name Weapon
 extends Node2D
 
 
@@ -33,3 +34,7 @@ func shoot() -> void:
 		get_parent().get_parent().add_child(b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
+
+
+func get_cooldown() -> float:
+	return cooldown_timer.time_left
