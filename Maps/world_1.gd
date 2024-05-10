@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var level_timer: Timer = $LevelTimer
 @onready var timer_label: Label = $Player/Camera2D/TimerLabel
+@onready var progress_bar: ProgressBar = $Player/Camera2D/ProgressBar
 @onready var player: CharacterBody2D = $Player
 
 @export var time: int = 30
@@ -9,18 +10,20 @@ extends Node2D
 
 const ENEMY = preload("res://characters/Enemies/Enemy.tscn")
 var spawning: bool = false
+var weapon: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	level_timer.start(time * 60)
-
+	weapon = player.get_weapon()
+	progress_bar.max_value = weapon.get_max_cooldown()
 
 func _process(_delta: float) -> void:
 	timer_label.text = _get_time()
+	progress_bar.value = progress_bar.max_value - weapon.get_cooldown()
 	if !spawning:
 		spawning = true
 		enemy_spawner()
-		print("SPAWN")
 
 
 func _get_time() -> String:
