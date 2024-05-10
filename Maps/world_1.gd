@@ -4,7 +4,7 @@ extends Node2D
 @onready var timer_label: Label = $Player/Camera2D/TimerLabel
 @onready var progress_bar: ProgressBar = $Player/Camera2D/ProgressBar
 @onready var player: CharacterBody2D = $Player
-@onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
+@onready var spawn_location: PathFollow2D = $Player/Camera2D/SpawnPath/SpawnLocation
 
 @export var time: int = 30
 @export var hostile: PackedScene = null

@@ -461,7 +461,7 @@ layer_0/tile_data = PackedInt32Array(-3080252, 131072, 15, -3014716, 131072, 15,
 
 [node name="Player" parent="." instance=ExtResource("1_hskar")]
 motion_mode = 1
-Weapon = ExtResource("5_smvcw")
+equipped_weapon = ExtResource("5_smvcw")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -478,26 +478,28 @@ offset_top = 271.0
 offset_right = 37.0
 offset_bottom = 298.0
 
-[node name="Marker2D" type="Marker2D" parent="Player/Camera2D"]
+[node name="SpawnPathCorners" type="Node" parent="Player/Camera2D"]
+
+[node name="Marker2D" type="Marker2D" parent="Player/Camera2D/SpawnPathCorners"]
 position = Vector2(600, -350)
 
-[node name="Marker2D2" type="Marker2D" parent="Player/Camera2D"]
+[node name="Marker2D2" type="Marker2D" parent="Player/Camera2D/SpawnPathCorners"]
 position = Vector2(600, 350)
 
-[node name="Marker2D3" type="Marker2D" parent="Player/Camera2D"]
+[node name="Marker2D3" type="Marker2D" parent="Player/Camera2D/SpawnPathCorners"]
 position = Vector2(-600, 350)
 
-[node name="Marker2D4" type="Marker2D" parent="Player/Camera2D"]
+[node name="Marker2D4" type="Marker2D" parent="Player/Camera2D/SpawnPathCorners"]
 position = Vector2(-600, -350)
 
-[node name="LevelTimer" type="Timer" parent="."]
-
-[node name="SpawnPath" type="Path2D" parent="."]
+[node name="SpawnPath" type="Path2D" parent="Player/Camera2D"]
 curve = SubResource("Curve2D_3gmod")
 
-[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+[node name="SpawnLocation" type="PathFollow2D" parent="Player/Camera2D/SpawnPath"]
 position = Vector2(600, -350)
 rotation = 1.5708
+
+[node name="LevelTimer" type="Timer" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
