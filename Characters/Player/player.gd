@@ -36,7 +36,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _on_hurt_box_area_entered(_area: Area2D) -> void:
-	print("PAIN")
-	pass # Replace with function body.
+func take_damage(damage: int) -> void:
+	Global.player_health -= damage
 
