@@ -4,6 +4,7 @@ extends Node2D
 @onready var timer_label: Label = $Player/Camera2D/TimerLabel
 @onready var progress_bar: ProgressBar = $Player/Camera2D/ProgressBar
 @onready var player: CharacterBody2D = $Player
+@onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 
 @export var time: int = 30
 @export var hostile: PackedScene = null
@@ -11,7 +12,7 @@ extends Node2D
 const ENEMY = preload("res://characters/Enemies/Enemy.tscn")
 var spawning: bool = false
 var weapon: Node2D
-var spawn_wave_size: int = 5
+var spawn_wave_size: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,24 +50,27 @@ func enemy_spawner():
 
 func spawn_shit(shit) -> void:
 	add_child(shit)
-@onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
+
 
 # Handle psawning in monsters.
 func _on_spawn_timer_timeout() -> void:
 	# Create a new instance of our hostile entity.
-	var wave: Array[CharacterBody2D] = []#Array[spawn_wave_size]
+	var wave: Array[CharacterBody2D] = []
 	for index in spawn_wave_size:
 		wave.append(hostile.instantiate())
 	# Choose random location on the SpawnPath.
 	# Store the reference to the SpawnLocation node.
-	var enemy_spawn_location = $SpawnPath/SpawnLocation
+#	var enemy_spawn_location = $SpawnPath/SpawnLocation
 	#var enemy_spawn_location: Array[PathFollow2D] = Array[spawn_wave_size]
 	#for loaction in enemy_spawn_location:
 	# 	location = $SpawnPath/SpawnLocation
 	
 	# Give it a random offset
 	for mob in wave:
-		enemy_spawn_location.progress_ratio = randf()
-		mob.position = enemy_spawn_location.position
-		mob.set_target(player)
+		spawn_location.progress_ratio = randf()
+		mob.initialize(player, spawn_location.position)
+		#mob.position = enemy_spawn_location.position
+		#mob.set_target(player)
 		add_child(mob)
+	# Increase the size of nect wave
+	spawn_wave_size += 1
