@@ -15,7 +15,6 @@ var dir: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	get_parent().direction_changed.connect(_aim)
 	cooldown_timer.wait_time = cooldown
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,13 +24,12 @@ func _process(delta: float) -> void:
 
 
 func _aim(direction: Vector2) -> void:
-	look_at(direction)
-	#dir = direction.normalized()
+	look_at(global_position + direction.normalized())
+
 
 func shoot() -> void:
 	if cooldown_timer.is_stopped():
 		var b = projectile.instantiate()
-		#look_at(self.global_position + dir)
 		get_parent().call_deferred("add_sibling", b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
