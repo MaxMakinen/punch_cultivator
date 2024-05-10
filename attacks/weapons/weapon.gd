@@ -37,3 +37,6 @@ func shoot() -> void:
 
 func get_cooldown() -> float:
 	return cooldown_timer.time_left
+
+func get_max_cooldown() -> float:
+	return cooldown

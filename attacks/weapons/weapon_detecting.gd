@@ -5,7 +5,7 @@ extends Node2D
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var muzzle: Marker2D = $Muzzle
 @export var projectile: PackedScene
-@export var cooldown: float = 0.2
+@export var cooldown: float = 0.6
 
 var shot: bool = false
 var dir: Vector2 = Vector2.ZERO
@@ -42,3 +42,6 @@ func shoot() -> void:
 
 func get_cooldown() -> float:
 	return cooldown_timer.time_left
+
+func get_max_cooldown() -> float:
+	return cooldown
