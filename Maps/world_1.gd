@@ -33,20 +33,6 @@ func _get_time() -> String:
 	var seconds: int = int(level_timer.time_left) % 60
 	return str(minutes) + ":" + str(seconds)
 
-# TODO: Needs to be it's own better thing
-func enemy_spawner():
-	var enemy
-	if hostile == null:
-		enemy = ENEMY.instantiate()
-	else:
-		enemy = hostile.instantiate()
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	var spawn_dir : Vector2 = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
-	enemy.position = player.position + spawn_dir.normalized() * 400
-	enemy.set_target(player)
-	add_child(enemy)
-	await get_tree().create_timer(2.0).timeout
-	spawning = false
 
 func spawn_shit(shit) -> void:
 	add_child(shit)
