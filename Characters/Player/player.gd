@@ -31,6 +31,7 @@ func _get_input():
 
 
 func _physics_process(_delta: float) -> void:
+	_check_health()
 	_get_input()
 	move_and_slide()
 
@@ -40,6 +41,13 @@ func take_damage(damage: int) -> void:
 		Global.player_health -= damage
 		print("HEALTH: ", Global.player_health)
 		damage_cooldown.start()
+
+
+func _check_health() -> void:
+	if Global.player_health <= 0:
+		print("YER DEAD!")
+		get_tree().quit()
+
 
 func get_weapon() -> Node2D:
 	return weapon
