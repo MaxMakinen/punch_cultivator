@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = 400
+@export var speed = 200
 @onready var hurt_box: Area2D = $HurtBox
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_cooldown: Timer = $DamageCooldown
@@ -13,8 +13,8 @@ extends CharacterBody2D
 
 
 var shot : bool = false
-var dir = Vector2.ZERO
-var weapon
+var dir: Vector2 = Vector2.ZERO
+var weapon: Node2D
 
 signal direction_changed(dir)
 
@@ -43,3 +43,5 @@ func take_damage(damage: int) -> void:
 		print("HEALTH: ", Global.player_health)
 		damage_cooldown.start()
 
+func get_weapon() -> Node2D:
+	return weapon
