@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const MOVEMENT_SPEED = 250.0
+const MOVEMENT_SPEED = 190.0
 
 var speed: int = MOVEMENT_SPEED
 var health: int = 5
@@ -58,6 +58,9 @@ func sprite_flash() -> void:
 func _handle_attack() -> void:
 	if target != null and target_in_attack_zone == true:
 		target.take_damage(1)
+		speed = 0
+		await get_tree().create_timer(0.25).timeout
+		speed = MOVEMENT_SPEED
 
 # When the target enters the hitbox, turn on target_in_attack_zone to enable ability to attack
 func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
