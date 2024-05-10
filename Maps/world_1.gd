@@ -32,10 +32,6 @@ func _get_time() -> String:
 	return str(minutes) + ":" + str(seconds)
 
 
-func spawn_shit(shit) -> void:
-	add_child(shit)
-
-
 # Handle psawning in monsters.
 func _on_spawn_timer_timeout() -> void:
 	# Create a new instance of our hostile entity.
