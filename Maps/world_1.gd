@@ -4,7 +4,8 @@ extends Node2D
 @onready var timer_label: Label = $Player/Camera2D/TimerLabel
 @onready var progress_bar: ProgressBar = $Player/Camera2D/ProgressBar
 @onready var player: CharacterBody2D = $Player
-@onready var spawn_location: PathFollow2D = $Player/Camera2D/SpawnPath/SpawnLocation
+#@onready var spawn_location: PathFollow2D = $Player/Camera2D/SpawnPath/SpawnLocation
+@onready var spawn_location: PathFollow2D = $Player/SpawnPath/SpawnLocation
 
 @export var time: int = 30
 @export var hostile: PackedScene = null
@@ -23,9 +24,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	timer_label.text = _get_time()
 	progress_bar.value = progress_bar.max_value - weapon.get_cooldown()
-#	if !spawning:
-#		spawning = true
-#		enemy_spawner()
 
 
 func _get_time() -> String:
@@ -54,7 +52,7 @@ func _on_spawn_timer_timeout() -> void:
 	# Give it a random offset
 	for mob in wave:
 		spawn_location.progress_ratio = randf()
-		mob.initialize(player, spawn_location.position)
+		mob.initialize(player, spawn_location.global_position)
 		#mob.position = enemy_spawn_location.position
 		#mob.set_target(player)
 		add_child(mob)
