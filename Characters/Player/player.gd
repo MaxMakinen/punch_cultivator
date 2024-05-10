@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 400
 @onready var hurt_box: Area2D = $HurtBox
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var damage_cooldown: Timer = $DamageCooldown
 
 @onready var muzzle: Marker2D = $Muzzle
 
@@ -37,5 +38,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func take_damage(damage: int) -> void:
-	Global.player_health -= damage
+	if damage_cooldown.is_stopped():
+		Global.player_health -= damage
+		print("HEALTH: ", Global.player_health)
+		damage_cooldown.start()
 
