@@ -47,3 +47,11 @@ func get_attacked(attack: Dictionary) -> bool:
 func sprite_flash() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(sprite_2d, "modulate:v", 1, 0.25).from(15)
+
+
+func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.
