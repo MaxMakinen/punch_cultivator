@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var speed = 400
 @onready var hurt_box: Area2D = $HurtBox
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var muzzle: Marker2D = $Muzzle
 

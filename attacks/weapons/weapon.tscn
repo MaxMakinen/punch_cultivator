@@ -8,7 +8,7 @@ script = ExtResource("1_bxens")
 projectile = ExtResource("2_1irc2")
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(64, 0)
+position = Vector2(30, 0)
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true

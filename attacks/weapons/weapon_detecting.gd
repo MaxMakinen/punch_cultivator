@@ -23,19 +23,19 @@ func _process(_delta: float) -> void:
 
 
 func _aim(direction: Vector2) -> void:
-	dir = direction.normalized()
+	look_at(direction)
+
 
 
 func _on_target_detection_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		_aim(body.position - self.position)
+		_aim(body.global_position)
 		shoot()
 
 
 func shoot() -> void:
 	if cooldown_timer.is_stopped():
 		var b = projectile.instantiate()
-		look_at(self.global_position + dir)
 		get_parent().call_deferred("add_sibling", b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)
