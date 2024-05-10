@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const MOVEMENT_SPEED = 190.0
+const MOVEMENT_SPEED = 190
 
 var speed: int = MOVEMENT_SPEED
 var health: int = 5
