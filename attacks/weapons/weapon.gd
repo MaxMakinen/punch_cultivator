@@ -6,6 +6,7 @@ extends Node2D
 @onready var muzzle: Marker2D = $Muzzle
 @export var projectile: PackedScene
 @export var cooldown: float = 0.5
+@onready var Hitbox: CollisionShape2D = $HitBox/CollisionShape2D
 
 var shot: bool = false
 var dir: Vector2 = Vector2.ZERO
