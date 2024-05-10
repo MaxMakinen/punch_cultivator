@@ -10,9 +10,14 @@ var target: CharacterBody2D = null
 var hurt: bool = false
 var target_in_attack_zone: bool = false
 
+signal enemy_dead()
+
 func set_target(new_target: CharacterBody2D) -> void:
 	target = new_target
 
+func initialize(new_target: CharacterBody2D, new_position: Vector2) -> void:
+	set_target(new_target)
+	position = new_position
 
 func _choose_direction() -> void:
 	var direction: Vector2 = target.position - self.position
@@ -35,6 +40,7 @@ func _take_damage(damage: int) -> void:
 # If health reaches zero, delete node
 func _check_health() -> void:
 	if health <= 0:
+		enemy_dead.emit()
 		queue_free()
 	hurt = false
 	speed = MOVEMENT_SPEED
