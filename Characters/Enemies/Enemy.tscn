@@ -81,6 +81,8 @@ sprite_frames = SubResource("SpriteFrames_7q2lx")
 shape = SubResource("CircleShape2D_5a38j")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 shape = SubResource("CircleShape2D_jddc6")
