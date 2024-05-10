@@ -15,9 +15,14 @@ signal enemy_dead(enemy)
 func set_target(new_target: CharacterBody2D) -> void:
 	target = new_target
 
+# TODO : Make enemy deets dicts? Then one node can represent any of them and be decided during initialization!
+# TODO : AnimatedSprite should then contain all animations for all enemies and they'll be chosen on initialization via reference from dict. We could even modulate for easy multicolored versions.
+# TODO : What all will our dict need? Speed, Health, armor, sprite. Attack_type, damage and projectile could be in weapon scene that get referenced/created via the dict
+# Sets up the enemies position and target.
 func initialize(new_target: CharacterBody2D, new_position: Vector2) -> void:
 	set_target(new_target)
 	position = new_position
+
 
 func _choose_direction() -> void:
 	var direction: Vector2 = target.position - self.position
