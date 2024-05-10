@@ -2,14 +2,12 @@ extends CharacterBody2D
 
 
 @export var speed = 200
-@onready var hurt_box: Area2D = $HurtBox
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_cooldown: Timer = $DamageCooldown
 
 @onready var muzzle: Marker2D = $Muzzle
 
-@export var Bullet : PackedScene
-@export var Weapon : PackedScene
+@export var equipped_weapon : PackedScene = null
 
 
 var shot : bool = false
@@ -19,7 +17,7 @@ var weapon: Node2D
 signal direction_changed(dir)
 
 func _ready() -> void:
-	weapon = Weapon.instantiate()
+	weapon = equipped_weapon.instantiate()
 	add_child(weapon)
 
 
