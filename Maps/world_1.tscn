@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fl0bie5hpx0p"]
+[gd_scene load_steps=9 format=3 uid="uid://fl0bie5hpx0p"]
 
 [ext_resource type="PackedScene" uid="uid://cqoh3q1s6e336" path="res://characters/Player/player.tscn" id="1_hskar"]
 [ext_resource type="Texture2D" uid="uid://djk51kjara7nh" path="res://assets/Generic Texture Tiles/Textures-16.png" id="1_mtyr6"]
@@ -443,6 +443,12 @@ texture = ExtResource("1_mtyr6")
 [sub_resource type="TileSet" id="TileSet_ahxh3"]
 sources/0 = SubResource("TileSetAtlasSource_hi87d")
 
+[sub_resource type="Curve2D" id="Curve2D_3gmod"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 600, -350, 0, 0, 0, 0, 600, 350, 0, 0, 0, 0, -600, 350, 0, 0, 0, 0, -600, -350, 0, 0, 0, 0, 600, -350)
+}
+point_count = 5
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_q5m33")
 hostile = ExtResource("2_q3o53")
@@ -472,4 +478,29 @@ offset_top = 271.0
 offset_right = 37.0
 offset_bottom = 298.0
 
+[node name="Marker2D" type="Marker2D" parent="Player/Camera2D"]
+position = Vector2(600, -350)
+
+[node name="Marker2D2" type="Marker2D" parent="Player/Camera2D"]
+position = Vector2(600, 350)
+
+[node name="Marker2D3" type="Marker2D" parent="Player/Camera2D"]
+position = Vector2(-600, 350)
+
+[node name="Marker2D4" type="Marker2D" parent="Player/Camera2D"]
+position = Vector2(-600, -350)
+
 [node name="LevelTimer" type="Timer" parent="."]
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3gmod")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(600, -350)
+rotation = 1.5708
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
