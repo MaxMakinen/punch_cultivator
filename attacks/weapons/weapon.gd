@@ -22,15 +22,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	await get_tree().create_timer(0.5).timeout
 	shoot()
-	pass
+
 
 func _aim(direction: Vector2) -> void:
-	dir = direction.normalized()
+	look_at(direction)
+	#dir = direction.normalized()
 
 func shoot() -> void:
 	if cooldown_timer.is_stopped():
 		var b = projectile.instantiate()
-		look_at(self.global_position + dir)
+		#look_at(self.global_position + dir)
 		get_parent().call_deferred("add_sibling", b)
 		b.transform = muzzle.global_transform
 		cooldown_timer.start(cooldown)

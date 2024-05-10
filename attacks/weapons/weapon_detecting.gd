@@ -26,7 +26,6 @@ func _aim(direction: Vector2) -> void:
 	look_at(direction)
 
 
-
 func _on_target_detection_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		_aim(body.global_position)
