@@ -10,7 +10,7 @@ var target: CharacterBody2D = null
 var hurt: bool = false
 var target_in_attack_zone: bool = false
 
-signal enemy_dead()
+signal enemy_dead(enemy)
 
 func set_target(new_target: CharacterBody2D) -> void:
 	target = new_target
@@ -40,7 +40,7 @@ func _take_damage(damage: int) -> void:
 # If health reaches zero, delete node
 func _check_health() -> void:
 	if health <= 0:
-		enemy_dead.emit()
+		enemy_dead.emit(self)
 		queue_free()
 	hurt = false
 	speed = MOVEMENT_SPEED
