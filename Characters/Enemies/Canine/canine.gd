@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var damage_numbers_origin: Node2D = $DamageNumbersOrigin
+@export var critical_chance: float = 0.1
 
 const MOVEMENT_SPEED = 190
 
@@ -40,7 +42,14 @@ func _physics_process(_delta: float) -> void:
 
 # Reduce heatlh by taken damage
 func _take_damage(damage: int) -> void:
+	var is_critical: bool
+	is_critical = critical_chance > randf()
+	if is_critical == true:
+		damage *= 2
 	health -= damage
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, is_critical)
+	if damage >= 0:
+		sprite_flash()
 
 # If health reaches zero, delete node
 func _check_health() -> void:
@@ -55,7 +64,6 @@ func get_attacked(attack: Dictionary) -> bool:
 	hurt = true
 	speed = 0
 	_take_damage(attack["damage"])
-	sprite_flash()
 	await get_tree().create_timer(0.25).timeout
 	_check_health()
 	return true
