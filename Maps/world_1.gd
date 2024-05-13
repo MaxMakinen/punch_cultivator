@@ -12,6 +12,7 @@ extends Node2D
 
 @onready var main_menu: Panel = $Camera2D/UIRoot/MainMenu
 @onready var enemy_spawner: Node2D = $EnemySpawner
+@onready var level_up: ColorRect = $Camera2D/UIRoot/LevelUp
 
 @onready var player: CharacterBody2D = $Player
 
@@ -22,7 +23,10 @@ var weapon: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().paused = false
 	main_menu.hide()
+	level_up.hide()
+	Global.level_up.connect(_leveling_up)
 	player.death_signal.connect(_pause)
 	level_timer.start(time * 60)
 	weapon = player.get_weapon()
@@ -48,9 +52,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _check_exp() -> void:
 	exp_bar.max_value = Global.level_up_at
 	exp_bar.value = Global.get_exp()
-	exp_number.text = "EXP : " + str(Global.get_exp())
+	exp_number.text = "EXP : " + str(Global.get_total_exp())
 	level_indicator.text = "Level : " + str(Global.get_level())
-
+	
 
 func _pause() -> void:
 	get_tree().paused = true
@@ -64,3 +68,7 @@ func _get_time() -> String:
 	var minutes: int = int(level_timer.time_left / 60.0)
 	var seconds: int = int(level_timer.time_left) % 60
 	return str(minutes) + ":" + str(seconds)
+
+func _leveling_up() -> void:
+	get_tree().paused = true
+	level_up.show()
