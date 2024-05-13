@@ -1,11 +1,22 @@
-[gd_scene format=3 uid="uid://iir3hegumxbn"]
+[gd_scene load_steps=3 format=3 uid="uid://iir3hegumxbn"]
+
+[ext_resource type="Script" path="res://attacks/effects/get_hurt_blood.gd" id="1_ahqb3"]
+
+[sub_resource type="Curve" id="Curve_e7gi4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0300001), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="GetHurtBlood" type="Node2D"]
+script = ExtResource("1_ahqb3")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-lifetime = 0.3
+emitting = false
+lifetime = 0.2
+one_shot = true
 explosiveness = 1.0
 spread = 30.0
 initial_velocity_min = 306.64
 initial_velocity_max = 334.51
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_e7gi4")
 color = Color(1, 0, 0, 1)
