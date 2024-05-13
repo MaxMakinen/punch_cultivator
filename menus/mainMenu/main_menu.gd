@@ -23,7 +23,6 @@ func _on_quit_button_pressed() -> void:
 	print("QUIT")
 
 
-
 func _on_continue_button_pressed() -> void:
 	_unpause()
 
