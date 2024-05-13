@@ -508,4 +508,8 @@ text = "EXP:"
 
 [node name="MainMenu" parent="Camera2D/UIRoot" instance=ExtResource("6_trnwl")]
 
+[node name="ButtonTimer" type="Timer" parent="Camera2D/UIRoot"]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

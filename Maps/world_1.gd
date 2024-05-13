@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var level_timer: Timer = $LevelTimer
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var button_timer: Timer = $Camera2D/UIRoot/ButtonTimer
 
 
 @onready var timer_label: Label = $Camera2D/UIRoot/TimerLabel
@@ -38,12 +39,13 @@ func _process(_delta: float) -> void:
 	exp_number.text = "EXP: " + str(Global.get_exp())
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("esc"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("esc") and button_timer.is_stopped():
 		if get_tree().paused == true:
 			_unpause()
 		else:
 			_pause()
+		button_timer.start()
 
 func _pause() -> void:
 	get_tree().paused = true

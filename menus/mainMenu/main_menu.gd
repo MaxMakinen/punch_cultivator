@@ -5,11 +5,9 @@ extends Panel
 signal _restart()
 signal _quit()
 
-
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("esc"):
-		if get_tree().paused == true:
-			_unpause()
+	if event.is_action_released("esc"):
+		_unpause()
 
 
 func _on_restart_button_pressed() -> void:
