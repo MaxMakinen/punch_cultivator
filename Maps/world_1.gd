@@ -59,7 +59,7 @@ func _get_time() -> String:
 	return str(minutes) + ":" + str(seconds)
 
 
-# Handle psawning in monsters.
+# Handle spawning in monsters.
 func _on_spawn_timer_timeout() -> void:
 	_spawn_wave()
 
