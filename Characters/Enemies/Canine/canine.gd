@@ -57,21 +57,24 @@ func _check_health() -> void:
 		enemy_dead.emit(self)
 		queue_free()
 	hurt = false
-	speed = MOVEMENT_SPEED
 
-#function for taking damage
+# Function for taking damage
 func get_attacked(attack: Dictionary) -> bool:
 	hurt = true
-	speed = 0
 	_take_damage(attack["damage"])
 	await get_tree().create_timer(0.25).timeout
 	_check_health()
 	return true
 
-# Flash the sprite white, used when taking damage
+# Flash the sprite white, Stop enemy movement ans animation during flash, used when taking damage.
 func sprite_flash() -> void:
 	var tween: Tween = create_tween()
+	speed = 0
 	tween.tween_property(sprite_2d, "modulate:v", 1, 0.25).from(15)
+	sprite_2d.pause()
+	await tween.finished
+	speed = MOVEMENT_SPEED
+	sprite_2d.play()
 
 # Check if we have a valiod target and whether the target is in the attack zone
 func _handle_attack() -> void:
