@@ -28,7 +28,6 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	print("BODIES")
 	if body.is_in_group("enemy"):
 #		if effect != null:
 #			var impact_effect = effect.instantiate()
