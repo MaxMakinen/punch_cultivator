@@ -13,15 +13,22 @@ const GET_HURT_BLOOD = preload("res://attacks/effects/get_hurt_blood.tscn")
 var shot : bool = false
 var dir: Vector2 = Vector2.ZERO
 var weapon: Node2D
+var equipment: Array[Node2D] = []
 
 signal direction_changed(dir)
 signal death_signal()
 
 func _ready() -> void:
 	health_bar.max_value = Global.player_max_health
-	weapon = equipped_weapon.instantiate()
-	add_child(weapon)
+	equip_weapon(equipped_weapon)
+#	weapon = equipped_weapon.instantiate()
+#	equipment.append(weapon)
+#	add_child(weapon)
 
+func equip_weapon(new_weapon: PackedScene) -> void:
+	weapon = new_weapon.instantiate()
+	equipment.append(weapon)
+	add_child(weapon)
 
 func _get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -50,14 +57,14 @@ func take_damage(damage: int, enemy_position: Vector2) -> void:
 func _check_health() -> void:
 	health_bar.value = Global.player_health
 	if Global.player_health <= 0:
-		print("YER DEAD!")
 		death_signal.emit()
-		#get_tree().quit()
 
 
 func get_weapon() -> Node2D:
 	return weapon
 
+func get_weapun() -> Node2D:
+	return equipment[0]
 
 func _on_pickup_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pickups"):
