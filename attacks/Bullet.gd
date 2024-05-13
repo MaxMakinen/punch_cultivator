@@ -1,7 +1,7 @@
 extends Area2D
 
 
-@export var speed: int = 750
+@export var speed: int = 250
 @export var effect: PackedScene = null
 @onready var lifetime: Timer = $Lifetime
 @onready var player = get_tree().get_first_node_in_group("player")
