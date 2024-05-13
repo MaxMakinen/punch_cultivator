@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var damage_numbers_origin: Node2D = $DamageNumbersOrigin
 @export var critical_chance: float = 0.1
 
-const MOVEMENT_SPEED = 190
+const MOVEMENT_SPEED = 150
 
 var speed: int = MOVEMENT_SPEED
 var health: int = 5
