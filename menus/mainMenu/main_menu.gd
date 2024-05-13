@@ -12,8 +12,11 @@ func _input(event: InputEvent) -> void:
 
 func _on_restart_button_pressed() -> void:
 #	_restart.emit()
-	owner.get_tree().paused = false
-	get_tree().reload_current_scene()
+	#print(owner.name)
+	Global.restart()
+	owner.get_tree().reload_current_scene()
+	#owner.get_tree().paused = false
+	#_unpause()
 	print("RESTART")
 
 
@@ -24,7 +27,9 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	_unpause()
+	if Global.player_health > 0:
+		_unpause()
+
 
 
 func _unpause() -> void:
