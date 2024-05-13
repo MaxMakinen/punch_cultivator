@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 200
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_cooldown: Timer = $DamageCooldown
+@onready var pickup_zone: Area2D = $PickupZone
 
 @onready var muzzle: Marker2D = $Muzzle
 
@@ -51,3 +52,9 @@ func _check_health() -> void:
 
 func get_weapon() -> Node2D:
 	return weapon
+
+
+func _on_pickup_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Pickups"):
+		print("	PICKUP FOUND")
+

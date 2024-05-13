@@ -55,6 +55,8 @@ func _take_damage(damage: int) -> void:
 func _check_health() -> void:
 	if health <= 0:
 		enemy_dead.emit(self)
+		#var exp_node = 
+		get_parent().add_child(Global.spawn_exp(position, 1))
 		queue_free()
 	hurt = false
 

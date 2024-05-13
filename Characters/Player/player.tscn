@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqoh3q1s6e336"]
+[gd_scene load_steps=7 format=3 uid="uid://cqoh3q1s6e336"]
 
 [ext_resource type="Script" path="res://characters/Player/player.gd" id="1_68e6m"]
 [ext_resource type="Texture2D" uid="uid://bje80bovy3cgj" path="res://assets/char_a_p1/char_a_p1_0bas_humn_v01.png" id="3_u38gp"]
@@ -21,6 +21,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3x8t"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iknrd"]
+radius = 50.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 5
@@ -33,9 +36,15 @@ sprite_frames = SubResource("SpriteFrames_nhv5o")
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_n3x8t")
 
-[node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(0, -65)
-
 [node name="DamageCooldown" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="PickupZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
+shape = SubResource("CircleShape2D_iknrd")
+
+[connection signal="body_entered" from="PickupZone" to="." method="_on_pickup_zone_body_entered"]
