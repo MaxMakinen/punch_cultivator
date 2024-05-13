@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx451j7646lg4"]
+[gd_scene load_steps=13 format=3 uid="uid://cx451j7646lg4"]
 
 [ext_resource type="Script" path="res://attacks/projectiles/projectile.gd" id="1_5ylhe"]
 [ext_resource type="Texture2D" uid="uid://bho5rjfqwh4y3" path="res://assets/projectiles/Generic_projectile_16x16.png" id="2_f8jcv"]
@@ -22,6 +22,22 @@ region = Rect2(608, 0, 16, 16)
 atlas = ExtResource("2_f8jcv")
 region = Rect2(624, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg56v"]
+atlas = ExtResource("2_f8jcv")
+region = Rect2(576, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv6o5"]
+atlas = ExtResource("2_f8jcv")
+region = Rect2(592, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hc86"]
+atlas = ExtResource("2_f8jcv")
+region = Rect2(608, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3ndf"]
+atlas = ExtResource("2_f8jcv")
+region = Rect2(624, 80, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p64ad"]
 animations = [{
 "frames": [{
@@ -40,6 +56,23 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg56v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv6o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hc86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3ndf")
+}],
+"loop": true,
+"name": &"throwing_star",
+"speed": 20.0
 }]
 
 [node name="Projectile" type="Area2D" groups=["projectile"]]
@@ -53,7 +86,7 @@ shape = SubResource("CircleShape2D_wqp53")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p64ad")
 autoplay = "default"
-frame_progress = 0.535648
+frame_progress = 0.0923595
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
