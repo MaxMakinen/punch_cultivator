@@ -6,7 +6,7 @@ extends Node2D
 
 @export var projectile: PackedScene
 @export var projectil: Projectile
-@export var spin_speed: float = 3
+@export var spin_speed: float = 2.5
 
 
 var cooldown = 3

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cx451j7646lg4" path="res://attacks/projectiles/projectile.tscn" id="2_ddbiw"]
 
 [node name="SpinBlade" type="Node2D"]
-rotation = 5294.11
 script = ExtResource("1_w7axe")
 projectile = ExtResource("2_ddbiw")
 spin_speed = 10.0
