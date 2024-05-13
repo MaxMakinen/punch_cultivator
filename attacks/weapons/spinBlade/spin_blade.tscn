@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2xskmcll5c3"]
+
+[ext_resource type="Script" path="res://attacks/weapons/spinBlade/spin_blade.gd" id="1_w7axe"]
+[ext_resource type="PackedScene" uid="uid://cx451j7646lg4" path="res://attacks/projectiles/projectile.tscn" id="2_ddbiw"]
+
+[node name="SpinBlade" type="Node2D"]
+rotation = 5294.11
+script = ExtResource("1_w7axe")
+projectile = ExtResource("2_ddbiw")
+spin_speed = 10.0
+
+[node name="AttackPoint" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
