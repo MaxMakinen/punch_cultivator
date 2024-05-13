@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_cooldown: Timer = $DamageCooldown
 @onready var pickup_zone: Area2D = $PickupZone
+@onready var health_bar: ProgressBar = $HealthBar
 
 @export var equipped_weapon : PackedScene = null
 
@@ -17,6 +18,7 @@ signal direction_changed(dir)
 signal death_signal()
 
 func _ready() -> void:
+	health_bar.max_value = Global.player_max_health
 	weapon = equipped_weapon.instantiate()
 	add_child(weapon)
 
@@ -46,6 +48,7 @@ func take_damage(damage: int, enemy_position: Vector2) -> void:
 
 
 func _check_health() -> void:
+	health_bar.value = Global.player_health
 	if Global.player_health <= 0:
 		print("YER DEAD!")
 		death_signal.emit()
