@@ -7,16 +7,17 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0300001), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="GetHurtBlood" type="Node2D"]
+z_index = 10
 script = ExtResource("1_ahqb3")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
-lifetime = 0.2
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 spread = 30.0
 initial_velocity_min = 306.64
 initial_velocity_max = 334.51
-scale_amount_max = 2.0
+scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_e7gi4")
 color = Color(1, 0, 0, 1)
