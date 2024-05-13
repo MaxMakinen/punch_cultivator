@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-@export var speed = 200
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_cooldown: Timer = $DamageCooldown
 @onready var pickup_zone: Area2D = $PickupZone
@@ -15,6 +14,7 @@ var dir: Vector2 = Vector2.ZERO
 var weapon: Node2D
 
 signal direction_changed(dir)
+signal death_signal()
 
 func _ready() -> void:
 	weapon = equipped_weapon.instantiate()
@@ -23,10 +23,9 @@ func _ready() -> void:
 
 func _get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	velocity = input_direction * Global.player_move_speed
 	if input_direction != Vector2.ZERO:
 		dir = input_direction.normalized()
-		#weapon.aim(dir)
 		direction_changed.emit(dir)
 
 
@@ -49,18 +48,15 @@ func take_damage(damage: int, enemy_position: Vector2) -> void:
 func _check_health() -> void:
 	if Global.player_health <= 0:
 		print("YER DEAD!")
-		get_tree().quit()
+		death_signal.emit()
+		#get_tree().quit()
 
 
 func get_weapon() -> Node2D:
 	return weapon
 
 
-func _on_pickup_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Pickups"):
-		var tween = get_tree().create_tween()
-		tween.tween_property(
-		body, "position", position, 0.25
-	).set_ease(Tween.EASE_OUT)
-		print("	PICKUP FOUND")
+func _on_pickup_zone_area_entered(area: Area2D) -> void:
+	if area.is_in_group("pickups"):
+		area.pull_to_player(self)
 

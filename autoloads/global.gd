@@ -6,6 +6,7 @@ const PUNCHPLOSION = preload("res://attacks/punchplosion.tscn")
 var difficulty: int = 0
 var player_health: int = 10
 var experience: int = 0
+var player_move_speed: float = 200.0
 
 var punch: Dictionary = {
 	"name" : "punch",
