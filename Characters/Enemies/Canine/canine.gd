@@ -81,7 +81,7 @@ func sprite_flash() -> void:
 # Check if we have a valiod target and whether the target is in the attack zone
 func _handle_attack() -> void:
 	if target != null and target_in_attack_zone == true:
-		target.take_damage(1)
+		target.take_damage(1, position)
 		speed = 0
 		await get_tree().create_timer(0.25).timeout
 		speed = MOVEMENT_SPEED

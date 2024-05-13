@@ -6,10 +6,9 @@ extends CharacterBody2D
 @onready var damage_cooldown: Timer = $DamageCooldown
 @onready var pickup_zone: Area2D = $PickupZone
 
-@onready var muzzle: Marker2D = $Muzzle
-
 @export var equipped_weapon : PackedScene = null
 
+const GET_HURT_BLOOD = preload("res://attacks/effects/get_hurt_blood.tscn")
 
 var shot : bool = false
 var dir: Vector2 = Vector2.ZERO
@@ -37,8 +36,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: int, enemy_position: Vector2) -> void:
 	if damage_cooldown.is_stopped():
+		var blood_effect = GET_HURT_BLOOD.instantiate()
+		blood_effect.initialize(self.position, (enemy_position - position).normalized())
+		add_child(blood_effect)
 		Global.player_health -= damage
 		print("HEALTH: ", Global.player_health)
 		damage_cooldown.start()
@@ -56,5 +58,9 @@ func get_weapon() -> Node2D:
 
 func _on_pickup_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Pickups"):
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+		body, "position", position, 0.25
+	).set_ease(Tween.EASE_OUT)
 		print("	PICKUP FOUND")
 
