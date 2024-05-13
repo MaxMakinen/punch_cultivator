@@ -8,6 +8,9 @@ extends Node2D
 @onready var timer_label: Label = $Camera2D/UIRoot/TimerLabel
 @onready var progress_bar: ProgressBar = $Camera2D/UIRoot/ProgressBar
 @onready var exp_number: Label = $Camera2D/UIRoot/ExpNumber
+@onready var exp_bar: ProgressBar = $Camera2D/UIRoot/ExpBar
+@onready var level_indicator: Label = $Camera2D/UIRoot/LevelIndicator
+
 @onready var main_menu: Panel = $Camera2D/UIRoot/MainMenu
 
 @onready var player: CharacterBody2D = $Player
@@ -36,7 +39,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	timer_label.text = _get_time()
 	progress_bar.value = progress_bar.max_value - weapon.get_cooldown()
-	exp_number.text = "EXP: " + str(Global.get_exp())
+	_check_exp()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,6 +49,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			_pause()
 		button_timer.start()
+
+
+func _check_exp() -> void:
+	exp_bar.max_value = Global.level_up_at
+	exp_bar.value = Global.get_exp()
+	exp_number.text = "EXP : " + str(Global.get_total_exp())
+	level_indicator.text = "Level : " + str(Global.get_level())
+
 
 func _pause() -> void:
 	get_tree().paused = true

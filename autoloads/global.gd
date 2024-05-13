@@ -28,12 +28,21 @@ var rear_guard: Dictionary = {
 # Increase experience and level up player if limit reached
 func gain_exp(new_exp: int) -> void:
 	experience += new_exp
+	total_exp += new_exp
 	if experience >= level_up_at:
 		_level_up()
 
-# return current experience level
+# Rseturn current experience level
 func get_exp() -> int:
 	return experience
+
+# Return toal acquired experience points
+func get_total_exp() -> int:
+	return total_exp
+
+# Return current player level
+func get_level() -> int:
+	return player_level
 
 # Spawn experience drop
 func spawn_exp(pos: Vector2, value: int) -> Node2D:
@@ -45,9 +54,7 @@ func spawn_exp(pos: Vector2, value: int) -> Node2D:
 func _level_up() -> void:
 	# increase player level
 	player_level += 1
-	# Keep score of total acquired experience
-	total_exp += experience
-	# Reset experience
+	# Reset experience for level up counter
 	experience -= level_up_at
 	# Increase new level up limit by half of current
 	level_up_at += level_up_at * 0.5

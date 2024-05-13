@@ -512,4 +512,17 @@ text = "EXP:"
 wait_time = 0.1
 one_shot = true
 
+[node name="ExpBar" type="ProgressBar" parent="Camera2D/UIRoot"]
+offset_left = 422.0
+offset_top = -266.0
+offset_right = 559.0
+offset_bottom = -239.0
+
+[node name="LevelIndicator" type="Label" parent="Camera2D/UIRoot"]
+offset_left = 468.0
+offset_top = -223.0
+offset_right = 508.0
+offset_bottom = -200.0
+text = "Level :"
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
