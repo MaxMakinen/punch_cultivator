@@ -13,13 +13,18 @@ var hurt: bool = false
 var target_in_attack_zone: bool = false
 
 var attack: Dictionary = {
-	"damage" : 5,
+	"name" : "Bite",
+	"damage" : 1,
 	"type" : ["physical"],
+	"critical_chance" : 0.0,
 }
 
 var resistances: Array = []
 
 signal enemy_dead(enemy)
+
+func _process(_delta: float) -> void:
+	_check_health()
 
 func get_resistances() -> Array:
 	return (resistances)
@@ -69,10 +74,10 @@ func take_damage(damage: int, is_critical: bool) -> void:
 	if damage >= 0:
 		sprite_flash()
 
-
 # If health reaches zero, delete node
 func _check_health() -> void:
 	if health <= 0:
+		await get_tree().create_timer(0.25).timeout
 		enemy_dead.emit(self)
 		#var exp_node = 
 		get_parent().add_child(Global.spawn_exp(position, 1))
@@ -100,7 +105,7 @@ func sprite_flash() -> void:
 # Check if we have a valiod target and whether the target is in the attack zone
 func _handle_attack() -> void:
 	if target != null and target_in_attack_zone == true:
-		target.take_damage(1, position)
+		#target.take_damage(1, position)
 		Global.attack_handler(target, attack)
 		speed = 0
 		await get_tree().create_timer(0.25).timeout

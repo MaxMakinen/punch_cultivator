@@ -13,7 +13,9 @@ var cooldown = 3
 
 var rear_guard: Dictionary = {
 	"name" : "Rear Guard",
-	"damage" : 5,
+	"damage" : 10,
+	"type" : ["physical"],
+	"critical_chance" : 0.1,
 	}
 
 

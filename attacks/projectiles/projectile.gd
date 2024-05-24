@@ -14,8 +14,13 @@ var element: String = "neutral"
 # How many enemies this projectile will penetrate, -1 means no limit.
 var penetration: int = -1
 
-var attack : Dictionary
+var attack: Dictionary
 var anim: String = "default"
+
+#var attack: Dictionary = {
+#	"damage" : 5,
+#	"type" : ["physical"],
+#}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +43,8 @@ func _on_body_entered(body: Node2D) -> void:
 #			var impact_effect = effect.instantiate()
 #			get_parent().add_child(impact_effect)
 #			impact_effect.position = body.global_position
-		body.get_attacked(attack)
+		#body.get_attacked(attack)
+		Global.attack_handler(body, attack)
 		if penetration > 0:
 			penetration -= 1
 		if penetration == 0:
