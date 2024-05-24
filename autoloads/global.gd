@@ -18,7 +18,9 @@ var player_move_speed: float = 200.0
 var punch: Dictionary = {
 	"name" : "punch",
 	"damage" : 5,
-	"scene" : PUNCHPLOSION
+	"scene" : PUNCHPLOSION,
+	"type" : ["physical"],
+	"critical_chance" : 0.1,
 }
 
 signal level_up()

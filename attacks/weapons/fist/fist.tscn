@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://br5sds4053w0i"]
+
+[ext_resource type="Script" path="res://attacks/weapons/fist/fist.gd" id="1_rmt3g"]
+[ext_resource type="Texture2D" uid="uid://l1b34m5vw0rk" path="res://assets/Bullet.png" id="1_rv8gq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdtmn"]
+radius = 4.0
+height = 16.0
+
+[node name="Fist" type="Area2D"]
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("1_rmt3g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fdtmn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_rv8gq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
