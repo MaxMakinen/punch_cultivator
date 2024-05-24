@@ -12,7 +12,17 @@ var target: CharacterBody2D = null
 var hurt: bool = false
 var target_in_attack_zone: bool = false
 
+var attack: Dictionary = {
+	"damage" : 5,
+	"type" : ["physical"],
+}
+
+var resistances: Array = []
+
 signal enemy_dead(enemy)
+
+func get_resistances() -> Array:
+	return (resistances)
 
 func set_target(new_target: CharacterBody2D) -> void:
 	target = new_target
@@ -51,6 +61,15 @@ func _take_damage(damage: int) -> void:
 	if damage >= 0:
 		sprite_flash()
 
+
+# Reduce heatlh by taken damage
+func take_damage(damage: int, is_critical: bool) -> void:
+	health -= damage
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, is_critical)
+	if damage >= 0:
+		sprite_flash()
+
+
 # If health reaches zero, delete node
 func _check_health() -> void:
 	if health <= 0:
@@ -82,6 +101,7 @@ func sprite_flash() -> void:
 func _handle_attack() -> void:
 	if target != null and target_in_attack_zone == true:
 		target.take_damage(1, position)
+		Global.attack_handler(target, attack)
 		speed = 0
 		await get_tree().create_timer(0.25).timeout
 		speed = MOVEMENT_SPEED

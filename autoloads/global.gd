@@ -65,3 +65,27 @@ func restart() -> void:
 	#experience = 0
 	player_level = 0
 	level_up_at = 10
+
+func can_resist(attack_types: Array, resistances: Array) -> bool:
+	if attack_types.size() > 0:
+		for type in attack_types:
+			if type in resistances:
+				return true
+	return false
+	
+
+# Handle dealing damage, take in target and attack info. Apply calculated damage to target and return true if attack is valid or false if attack hits wall and should stop.
+func attack_handler(target: Node2D, attack: Dictionary) -> bool:
+	if target.has_method("get_resistances"):
+		var resistances: Array = target.get_resistances()
+		var multiplier: float = 1.0
+		var damage = float(attack["damage"])
+		if can_resist(attack["type"], resistances):
+			damage *= 0.5
+		var is_critical: bool
+		is_critical = float(attack["critical_chance"]) > randf()
+		if is_critical == true:
+			damage *= 2
+		target.take_damage(damage, is_critical)
+		return true
+	return false

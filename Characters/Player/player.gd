@@ -18,6 +18,12 @@ var equipment: Array[Node2D] = []
 signal direction_changed(dir)
 signal death_signal()
 
+var resistances: Array = []
+
+func get_resistances() -> Array:
+	return (resistances)
+
+
 func _ready() -> void:
 	health_bar.max_value = Global.player_max_health
 	equip_weapon(equipped_weapon)
@@ -44,11 +50,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func take_damage(damage: int, enemy_position: Vector2) -> void:
+func take_damage(damage: int, is_critical: bool) -> void: #, enemy_position: Vector2) -> void:
 	if damage_cooldown.is_stopped():
-		var blood_effect = GET_HURT_BLOOD.instantiate()
-		blood_effect.initialize(self.position, (enemy_position - position).normalized())
-		add_child(blood_effect)
+#		var blood_effect = GET_HURT_BLOOD.instantiate()
+#		blood_effect.initialize(self.position, (enemy_position - position).normalized())
+#		add_child(blood_effect)
 		Global.player_health -= damage
 		print("HEALTH: ", Global.player_health)
 		damage_cooldown.start()
