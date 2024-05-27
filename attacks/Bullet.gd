@@ -1,7 +1,7 @@
 extends Area2D
 
 
-@export var speed: int = 250
+@export var speed: int = 150
 @export var effect: PackedScene = null
 @onready var lifetime: Timer = $Lifetime
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -16,7 +16,12 @@ var attack: Dictionary = {
 	"scene" : PUNCHPLOSION,
 	"type" : ["physical"],
 	"critical_chance" : 0.1,
+	"speed" : 200,
 }
+
+func initialize(new_attack: Dictionary) -> void:
+	attack = new_attack
+	speed = attack["speed"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
