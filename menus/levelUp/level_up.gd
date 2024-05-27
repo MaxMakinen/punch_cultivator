@@ -1,7 +1,7 @@
 extends ColorRect
 
 @export var new_weapon: PackedScene
-var check: bool = false
+var check: bool = true
 
 func _on_button_pressed() -> void:
 	var player = get_tree().get_first_node_in_group("player")
