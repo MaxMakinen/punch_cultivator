@@ -24,7 +24,8 @@ var resistances: Array = []
 signal enemy_dead(enemy)
 
 func _process(_delta: float) -> void:
-	_check_health()
+	#_check_health()
+	pass
 
 func get_resistances() -> Array:
 	return (resistances)
@@ -73,6 +74,7 @@ func take_damage(damage: int, is_critical: bool) -> void:
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, is_critical)
 	if damage >= 0:
 		sprite_flash()
+	_check_health()
 
 # If health reaches zero, delete node
 func _check_health() -> void:
