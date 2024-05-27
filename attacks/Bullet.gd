@@ -7,7 +7,9 @@ extends Area2D
 @onready var player = get_tree().get_first_node_in_group("player")
 
 const PUNCHPLOSION = preload("res://attacks/punchplosion.tscn")
+signal projectile_despawned()
 
+var life_len: float = 0.5
 var attack: Dictionary = {
 	"name" : "punch",
 	"damage" : 10,
@@ -18,7 +20,7 @@ var attack: Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	lifetime.start(3)
+	lifetime.start(life_len)
 	pass # Replace with function body.
 
 
@@ -26,7 +28,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position += transform.x * speed * delta
 	if lifetime.is_stopped():
-		queue_free()
+		_despawn()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -38,4 +40,16 @@ func _on_body_entered(body: Node2D) -> void:
 		Global.attack_handler(body, attack)
 		body.get_attacked(Global.punch)
 		#body.queue_free()
-		queue_free()
+		_despawn()
+
+func _despawn() -> void:
+	projectile_despawned.emit()
+	queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	_despawn()
+
+
+func _on_lifetime_timeout() -> void:
+	_despawn()
