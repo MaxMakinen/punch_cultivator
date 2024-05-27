@@ -6,26 +6,26 @@ extends Area2D
 @onready var lifetime: Timer = $Lifetime
 @onready var player = get_tree().get_first_node_in_group("player")
 
-const PUNCHPLOSION = preload("res://attacks/punchplosion.tscn")
 signal projectile_despawned()
 
-var life_len: float = 0.5
+var attack_range: float = 0.5
 var attack: Dictionary = {
 	"name" : "punch",
 	"damage" : 10,
-	"scene" : PUNCHPLOSION,
 	"type" : ["physical"],
 	"critical_chance" : 0.1,
 	"speed" : 200,
+	"range" : 0.5,
 }
 
 func initialize(new_attack: Dictionary) -> void:
 	attack = new_attack
 	speed = attack["speed"]
+	attack_range = attack["range"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	lifetime.start(life_len)
+	lifetime.start(attack_range)
 	pass # Replace with function body.
 
 
