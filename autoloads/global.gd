@@ -23,6 +23,18 @@ var punch: Dictionary = {
 	"critical_chance" : 0.1,
 }
 
+var attack: Dictionary = {
+	"name" : "punch",
+	"damage" : 10,
+	"type" : ["physical"],
+	"critical_chance" : 0.1,
+	"speed" : 250,
+	"range" : 0.5,
+	"cooldown" : 1.0,
+	"combo_cooldown" : 0.3,
+	"combo_max" : 2,
+}
+
 signal level_up()
 
 # Increase experience and level up player if limit reached
