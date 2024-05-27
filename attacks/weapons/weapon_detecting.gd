@@ -1,12 +1,13 @@
 class_name WeaponDetecting
 extends Node2D
 
+@onready var combo_timer: Timer = $ComboTimer
+@export var combo_cooldown: float = 0.3
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var muzzle: Marker2D = $Muzzle
 @export var projectile: PackedScene
 @export var cooldown: float = 0.6
-@export var combo_cooldown: float = 0.1
 
 @export var combo_max: int = 2
 var combo_spent: int = 0
@@ -28,24 +29,34 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if _attack_possible():
-		if cooldown_timer.is_stopped():
-			if can_attack:
-				_attack()
-		elif combo_spent < combo_max:
-			if can_attack:
-				_attack()
+		_attack()
+	#	if cooldown_timer.is_stopped() and combo_timer.is_stopped():
+	#		if can_attack:
+	#			_attack()
+	#	elif combo_spent < combo_max and combo_timer.is_stopped():
+	#		if can_attack:
+	#			_attack()
 
 
 func _attack() -> void:
 	for target in valid_targets:
 		_aim(target.position)
-		shoot()
-#	if can_attack:
-#		combo_spent += 1
-#		shoot()
-#	elif combo_spent < combo_max:
-#		combo_spent += 1
-#		shoot()
+		if cooldown_timer.is_stopped() and combo_timer.is_stopped():
+			if can_attack:
+				shoot()
+		elif combo_spent < combo_max and combo_timer.is_stopped():
+			if can_attack:
+				shoot()
+
+#		if can_attack:
+#			_aim(target.position)
+#			shoot()
+#		if can_attack:
+#			combo_spent += 1
+#			shoot()
+#		elif combo_spent < combo_max:
+#			combo_spent += 1
+#			shoot()
 
 func _aim(direction: Vector2) -> void:
 	look_at(direction)
@@ -56,24 +67,27 @@ func _attack_possible() -> bool:
 	return false
 
 func shoot() -> void:
-	#if can_attack:
 	can_attack = false
-	
-	var b = projectile.instantiate()
-	get_parent().call_deferred("add_sibling", b)
 	
 	combo_spent += 1
 	attacks_out += 1
 	
+	var b = projectile.instantiate()
+	get_parent().call_deferred("add_sibling", b)
 	b.transform = muzzle.global_transform
-	b.projectile_despawned.connect(start_cooldown)
-	#start_cooldown()
+	b.projectile_despawned.connect(attack_finished)
+	
+	_start_timers()
 
-func start_cooldown() -> void:
+func _start_timers() -> void:
+	combo_timer.start(combo_cooldown)
+	if cooldown_timer.is_stopped():
+		cooldown_timer.start(cooldown)
+
+func attack_finished() -> void:
 	attacks_out -= 1
-	if attacks_out <= 0:
+	if attacks_out < 0:
 		attacks_out = 0
-	cooldown_timer.start(cooldown)
 	can_attack = true
 
 func get_cooldown() -> float:
