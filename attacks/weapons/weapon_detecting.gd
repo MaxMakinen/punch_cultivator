@@ -2,7 +2,7 @@ class_name WeaponDetecting
 extends Node2D
 
 @onready var combo_timer: Timer = $ComboTimer
-@export var combo_cooldown: float = 0.3
+@export var combo_cooldown: float = 0.1
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var muzzle: Marker2D = $Muzzle
@@ -34,13 +34,11 @@ func _process(_delta: float) -> void:
 
 func _attack() -> void:
 	for target in valid_targets:
-		_aim(target.position)
-		if cooldown_timer.is_stopped() and combo_timer.is_stopped():
-			if can_attack:
-				shoot()
-		elif combo_spent < combo_max and combo_timer.is_stopped():
-			if can_attack:
-				shoot()
+		if can_attack:
+			_aim(target.position)
+			if combo_timer.is_stopped():
+				if cooldown_timer.is_stopped() or combo_spent < combo_max:
+					shoot()
 
 
 func _aim(direction: Vector2) -> void:
