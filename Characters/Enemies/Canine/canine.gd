@@ -86,9 +86,9 @@ func _check_health() -> void:
 	hurt = false
 
 # Function for taking damage
-func get_attacked(attack: Dictionary) -> bool:
+func get_attacked(incoming_attack: Dictionary) -> bool:
 	hurt = true
-	_take_damage(attack["damage"])
+	_take_damage(incoming_attack["damage"])
 	await get_tree().create_timer(0.25).timeout
 	_check_health()
 	return true

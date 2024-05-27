@@ -53,7 +53,7 @@ func _physics_process(_delta: float) -> void:
 	attacks_out.text = str(equipment[0].attacks_out)
 
 
-func take_damage(damage: int, is_critical: bool) -> void: #, enemy_position: Vector2) -> void:
+func take_damage(damage: int, _is_critical: bool) -> void: #, enemy_position: Vector2) -> void:
 	if damage_cooldown.is_stopped():
 #		var blood_effect = GET_HURT_BLOOD.instantiate()
 #		blood_effect.initialize(self.position, (enemy_position - position).normalized())
