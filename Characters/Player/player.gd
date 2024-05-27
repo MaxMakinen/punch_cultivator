@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var pickup_zone: Area2D = $PickupZone
 @onready var health_bar: ProgressBar = $HealthBar
 
+@onready var attacks_out: Label = $AttacksOut
+
 @export var equipped_weapon : PackedScene = null
 
 const GET_HURT_BLOOD = preload("res://attacks/effects/get_hurt_blood.tscn")
@@ -48,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 	_check_health()
 	_get_input()
 	move_and_slide()
+	attacks_out.text = str(equipment[0].attacks_out)
 
 
 func take_damage(damage: int, is_critical: bool) -> void: #, enemy_position: Vector2) -> void:
