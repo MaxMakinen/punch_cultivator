@@ -25,6 +25,7 @@ var attack: Dictionary = {
 	"type" : ["physical"],
 	"critical_chance" : 0.1,
 	"speed" : 250,
+	"range" : 0.5,
 	"cooldown" : 1.0,
 	"combo_cooldown" : 0.3,
 	"combo_max" : 2,
@@ -128,7 +129,17 @@ func upgrade_amount() -> void:
 		attack["combo_cooldown"] = attack["cooldown"] / attack["combo_max"]
 	upgrade_speed()
 
+func upgrade_combo_cooldown(combo_cooldown_increase: float = 0.9) -> void:
+	attack["combo_cooldown"] *= combo_cooldown_increase
+
+func upgrade_cooldown(cooldown_increase: float = 0.9) -> void:
+	attack["cooldown"] *= cooldown_increase
 
 func upgrade_speed(speed_increase: int = 20) -> void:
 	attack["speed"] += speed_increase
 
+func upgrade_range(range_increase: float = 0.1) -> void:
+	attack["range"] += range_increase
+
+func upgrade_combo(combo_increase: int = 1) -> void:
+	attack["combo_max"] += combo_increase
