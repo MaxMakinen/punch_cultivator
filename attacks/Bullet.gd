@@ -38,7 +38,7 @@ func _on_body_entered(body: Node2D) -> void:
 			get_parent().add_child(impact_effect)
 			impact_effect.position = body.global_position
 		Global.attack_handler(body, attack)
-		body.get_attacked(Global.punch)
+		#body.get_attacked(Global.punch)
 		#body.queue_free()
 		_despawn()
 
