@@ -2,17 +2,16 @@ class_name WeaponDetecting
 extends Node2D
 
 @onready var combo_timer: Timer = $ComboTimer
-@export var combo_cooldown: float = 0.1
+#@export var combo_cooldown: float = 0.2
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var muzzle: Marker2D = $Muzzle
 @export var projectile: PackedScene
-@export var cooldown: float = 1.0
+#@export var cooldown: float = 1.0
 
-@export var combo_max: int = 2
+#@export var combo_max: int = 2
 var combo_spent: int = 0
 
-var attacks_out: int = 0
 
 var shot: bool = false
 var enemy_in_attack_zone: bool = false
@@ -20,11 +19,24 @@ var can_attack: bool = true
 var dir: Vector2 = Vector2.ZERO
 var valid_targets: Array[Node2D] = []
 
+var attack: Dictionary = {
+	"name" : "punch",
+	"damage" : 10,
+	"type" : ["physical"],
+	"critical_chance" : 0.1,
+	"speed" : 250,
+	"cooldown" : 1.0,
+	"combo_cooldown" : 0.3,
+	"combo_max" : 2,
+}
+
+func get_deets() -> Dictionary:
+	return attack
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	cooldown_timer.wait_time = cooldown
-
-
+	#cooldown_timer.wait_time = cooldown
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -37,7 +49,7 @@ func _attack() -> void:
 		if can_attack:
 			_aim(target.position)
 			if combo_timer.is_stopped():
-				if cooldown_timer.is_stopped() or combo_spent < combo_max:
+				if cooldown_timer.is_stopped() or combo_spent < attack["combo_max"]:
 					shoot()
 
 
@@ -53,9 +65,9 @@ func shoot() -> void:
 	can_attack = false
 	
 	combo_spent += 1
-	attacks_out += 1
 	
 	var b = projectile.instantiate()
+	b.initialize(attack)
 	get_parent().call_deferred("add_sibling", b)
 	b.transform = muzzle.global_transform
 	b.projectile_despawned.connect(attack_finished)
@@ -63,21 +75,18 @@ func shoot() -> void:
 	_start_timers()
 
 func _start_timers() -> void:
-	combo_timer.start(combo_cooldown)
+	combo_timer.start(attack["combo_cooldown"])
 	if cooldown_timer.is_stopped():
-		cooldown_timer.start(cooldown)
+		cooldown_timer.start(attack["cooldown"])
 
 func attack_finished() -> void:
-	attacks_out -= 1
-	if attacks_out < 0:
-		attacks_out = 0
 	can_attack = true
 
 func get_cooldown() -> float:
 	return cooldown_timer.time_left
 
 func get_max_cooldown() -> float:
-	return cooldown
+	return attack["cooldown"]
 
 func _add_enemy_to_targets(enemy: Node2D) -> void:
 	valid_targets.append(enemy)
@@ -108,10 +117,18 @@ func _on_target_detection_body_exited(body: Node2D) -> void:
 			enemy_in_attack_zone = false
 
 
-func upgrade_amount() -> void:
-	cooldown *= 0.9
-
-
 func _on_cooldown_timer_timeout() -> void:
 	can_attack = true
 	combo_spent = 0
+
+
+func upgrade_amount() -> void:
+	attack["cooldown"] *= 0.9
+	if attack["cooldown"] / attack["combo_max"] < attack["combo_cooldown"]:
+		attack["combo_cooldown"] = attack["cooldown"] / attack["combo_max"]
+	upgrade_speed()
+
+
+func upgrade_speed(speed_increase: int = 20) -> void:
+	attack["speed"] += speed_increase
+
