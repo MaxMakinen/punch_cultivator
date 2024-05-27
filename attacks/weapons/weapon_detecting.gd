@@ -7,7 +7,7 @@ extends Node2D
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var muzzle: Marker2D = $Muzzle
 @export var projectile: PackedScene
-@export var cooldown: float = 0.6
+@export var cooldown: float = 1.0
 
 @export var combo_max: int = 2
 var combo_spent: int = 0
@@ -30,12 +30,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _attack_possible():
 		_attack()
-	#	if cooldown_timer.is_stopped() and combo_timer.is_stopped():
-	#		if can_attack:
-	#			_attack()
-	#	elif combo_spent < combo_max and combo_timer.is_stopped():
-	#		if can_attack:
-	#			_attack()
 
 
 func _attack() -> void:
@@ -48,15 +42,6 @@ func _attack() -> void:
 			if can_attack:
 				shoot()
 
-#		if can_attack:
-#			_aim(target.position)
-#			shoot()
-#		if can_attack:
-#			combo_spent += 1
-#			shoot()
-#		elif combo_spent < combo_max:
-#			combo_spent += 1
-#			shoot()
 
 func _aim(direction: Vector2) -> void:
 	look_at(direction)
@@ -114,7 +99,8 @@ func _on_target_detection_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		enemy_in_attack_zone = true
 		_add_enemy_to_targets(body)
-		body.enemy_dead.connect(_remove_from_targets)
+		if not body.is_connected("enemy_dead", _remove_from_targets):
+			body.enemy_dead.connect(_remove_from_targets)
 
 
 func _on_target_detection_body_exited(body: Node2D) -> void:
