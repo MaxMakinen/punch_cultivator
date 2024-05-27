@@ -77,8 +77,9 @@ func take_damage(damage: int, is_critical: bool) -> void:
 # If health reaches zero, delete node
 func _check_health() -> void:
 	if health <= 0:
-		await get_tree().create_timer(0.25).timeout
+		remove_from_group("enemy")
 		enemy_dead.emit(self)
+		await get_tree().create_timer(0.25).timeout
 		#var exp_node = 
 		get_parent().add_child(Global.spawn_exp(position, 1))
 		queue_free()
