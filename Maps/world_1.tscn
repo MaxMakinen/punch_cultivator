@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://djk51kjara7nh" path="res://assets/Generic Texture Tiles/Textures-16.png" id="1_mtyr6"]
 [ext_resource type="Script" path="res://Maps/world_1.gd" id="1_q5m33"]
 [ext_resource type="PackedScene" uid="uid://bfoe7iyc7v1ne" path="res://characters/Enemies/Canine/canine.tscn" id="2_q3o53"]
-[ext_resource type="PackedScene" uid="uid://d2xskmcll5c3" path="res://attacks/weapons/spinBlade/spin_blade.tscn" id="4_dr7mo"]
+[ext_resource type="PackedScene" uid="uid://c0halqfs0qu4a" path="res://attacks/weapons/weapon_detecting.tscn" id="4_v67op"]
 [ext_resource type="PackedScene" uid="uid://dm5q4yr7rt1s2" path="res://maps/EnemySpawner/enemy_spawner.tscn" id="6_krv4f"]
 [ext_resource type="PackedScene" uid="uid://d3lu5n0tjmrx2" path="res://menus/mainMenu/main_menu.tscn" id="6_trnwl"]
 [ext_resource type="PackedScene" uid="uid://bn5smhghx01wo" path="res://menus/levelUp/level_up.tscn" id="8_wtccm"]
@@ -457,7 +457,7 @@ layer_0/tile_data = PackedInt32Array(-3080252, 131072, 15, -3014716, 131072, 15,
 
 [node name="Player" parent="." instance=ExtResource("1_hskar")]
 motion_mode = 1
-equipped_weapon = ExtResource("4_dr7mo")
+equipped_weapon = ExtResource("4_v67op")
 
 [node name="CameraRemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -531,5 +531,17 @@ text = "Wave:"
 [node name="LevelUp" parent="Camera2D/UIRoot" instance=ExtResource("8_wtccm")]
 visible = false
 z_index = 100
+
+[node name="Cooldown" type="Label" parent="Camera2D/UIRoot"]
+offset_left = -19.0
+offset_top = 248.0
+offset_right = 21.0
+offset_bottom = 271.0
+
+[node name="Cooldown2" type="Label" parent="Camera2D/UIRoot"]
+offset_left = 37.0
+offset_top = 247.0
+offset_right = 77.0
+offset_bottom = 270.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
