@@ -20,6 +20,7 @@ extends Node2D
 
 @onready var cooldown: Label = $Camera2D/UIRoot/Cooldown
 @onready var cooldown_2: Label = $Camera2D/UIRoot/Cooldown2
+@onready var max_combo: Label = $Camera2D/UIRoot/MaxCombo
 
 var weapon: Node2D
 
@@ -40,6 +41,7 @@ func _process(_delta: float) -> void:
 	progress_bar.max_value = weapon.get_max_cooldown()
 	cooldown.text = str(weapon.get_max_cooldown())
 	cooldown_2.text = str(weapon.attack["combo_cooldown"])
+	max_combo.text = str(weapon.attack["combo_max"])
 	progress_bar.value = progress_bar.max_value - weapon.get_cooldown()
 	wave_label.text = "Wave : " + str(enemy_spawner.get_wave_size())
 	_check_exp()
