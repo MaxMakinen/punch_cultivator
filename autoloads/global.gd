@@ -64,7 +64,7 @@ func restart() -> void:
 	player_health = 10
 	player_max_health = 10
 	total_exp = 0
-	#experience = 0
+	experience = 0
 	player_level = 0
 	level_up_at = 10
 
