@@ -80,7 +80,6 @@ func can_resist(attack_types: Array, resistances: Array) -> bool:
 func attack_handler(target: Node2D, attack: Dictionary) -> bool:
 	if target.has_method("get_resistances"):
 		var resistances: Array = target.get_resistances()
-		var multiplier: float = 1.0
 		var damage = float(attack["damage"])
 		if can_resist(attack["type"], resistances):
 			damage *= 0.5
