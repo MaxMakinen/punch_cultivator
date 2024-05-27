@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 	_check_health()
 	_get_input()
 	move_and_slide()
-	attacks_out.text = str(equipment[0].attacks_out)
+	attacks_out.text = str(equipment[0].combo_spent)
 
 
 func take_damage(damage: int, _is_critical: bool) -> void: #, enemy_position: Vector2) -> void:
