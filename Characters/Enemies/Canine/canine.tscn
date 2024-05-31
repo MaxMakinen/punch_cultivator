@@ -49,7 +49,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_87mn6")
 }],
 "loop": true,
-"name": &"default",
+"name": &"canine",
 "speed": 10.0
 }]
 
@@ -68,8 +68,8 @@ script = ExtResource("1_pp2ts")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_0b8pe")
-autoplay = "default"
-frame_progress = 0.238662
+animation = &"canine"
+autoplay = "canine"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
