@@ -21,6 +21,10 @@ var _permanent_attack_modifiers: Dictionary = {}
 var _permanent_speed_modifiers: Dictionary = {}
 var _permanent_health_modifiers: Dictionary = {}
 
+var _temporary_attack_multipliers: Dictionary = {}
+var _temporary_speed_multipliers: Dictionary = {}
+var _temporary_health_multipliers: Dictionary = {}
+
 func load_player(player_save: Dictionary) -> void:
 	# Load player base details from save dict
 	player_dict = player_save["player_dict"]
@@ -83,4 +87,34 @@ func add_to_permanent_speed_modifiers(new_modifier) -> void:
 func add_to_permanent_health_modifiers(new_modifier) -> void:
 	_permanent_health_modifiers.merge(new_modifier)
 
+# TEMPORARY MULTIPLIERS
 
+func get_temporary_attack_multipliers() -> Dictionary:
+	return _temporary_attack_multipliers
+
+
+func get_temporary_speed_multipliers() -> Dictionary:
+	return _temporary_speed_multipliers
+
+
+func get_temporary_health_multipliers() -> Dictionary:
+	return _temporary_health_multipliers
+
+
+
+func add_to_temporary_attack_multipliers(new_modifier) -> void:
+	_temporary_attack_multipliers.merge(new_modifier)
+
+
+func add_to_temporary_speed_multipliers(new_modifier) -> void:
+	_temporary_speed_multipliers.merge(new_modifier)
+
+
+func add_to_temporary_health_multipliers(new_modifier) -> void:
+	_temporary_health_multipliers.merge(new_modifier)
+
+
+func clear_temporary_multipliers() -> void:
+	_temporary_attack_multipliers.clear()
+	_temporary_speed_multipliers.clear()
+	_temporary_health_multipliers.clear()
