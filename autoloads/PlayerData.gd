@@ -22,6 +22,7 @@ var _permanent_speed_modifiers: Dictionary = {}
 var _permanent_health_modifiers: Dictionary = {}
 
 func load_player(player_save: Dictionary) -> void:
+	# Load player base details from save dict
 	player_dict = player_save["player_dict"]
 	# These two might be pointless and could be gotten directly from the dict
 	_max_health = player_save["max_health"]
