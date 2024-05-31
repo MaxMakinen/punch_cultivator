@@ -89,16 +89,17 @@ func can_resist(attack_types: Array, resistances: Array) -> bool:
 
 
 # Calculate final damage by adding all modifiers to base damage and then multiply by temporary multipliers gotten from run
-func calculate_damage() -> float:
+func calculate_damage(attack: Dictionary, target: Node2D) -> float:
 	var base_damage : float = attack["damage"]
 	var perm_modifier : float = 0.0
 	var temp_multiplier : float = 1.0
-	var perm_modifiers : Dictionary = PlayerData.get_permanent_attack_modifiers()
-	var temp_multipliers : Dictionary = PlayerData.get_temporary_attack_multipliers()
-	for modifier in perm_modifiers:
-		perm_modifier += modifier["effect"]
-	for multiplier in temp_multipliers:
-		temp_multiplier += multiplier["effect"]
+	if not target.is_in_group("player"):
+		var perm_modifiers : Dictionary = PlayerData.get_permanent_attack_modifiers()
+		var temp_multipliers : Dictionary = PlayerData.get_temporary_attack_multipliers()
+		for modifier in perm_modifiers:
+			perm_modifier += modifier["effect"]
+		for multiplier in temp_multipliers:
+			temp_multiplier += multiplier["effect"]
 
 	return (base_damage + perm_modifier) * temp_multiplier
 
@@ -107,7 +108,7 @@ func attack_handler(target: Node2D, attack: Dictionary) -> bool:
 	if target.has_method("get_resistances"):
 		var resistances: Array = target.get_resistances()
 		#var damage = float(attack["damage"])
-		var damage = calculate_damage()
+		var damage = calculate_damage(attack, target)
 		if can_resist(attack["type"], resistances):
 			damage *= 0.5
 		var is_critical: bool
