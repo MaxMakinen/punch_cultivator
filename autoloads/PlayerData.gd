@@ -21,6 +21,7 @@ var _permanent_attack_modifiers: Dictionary = {}
 var _permanent_speed_modifiers: Dictionary = {}
 var _permanent_health_modifiers: Dictionary = {}
 
+
 var _temporary_attack_multipliers: Dictionary = {}
 var _temporary_speed_multipliers: Dictionary = {}
 var _temporary_health_multipliers: Dictionary = {}

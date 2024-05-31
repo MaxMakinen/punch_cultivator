@@ -35,6 +35,12 @@ var attack: Dictionary = {
 	"combo_max" : 2,
 }
 
+
+var temp_multipliers: Dictionary = {
+	"increase damage" : 0.1,
+}
+
+
 signal level_up()
 
 # Increase experience and level up player if limit reached
