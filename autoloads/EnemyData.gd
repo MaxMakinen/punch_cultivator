@@ -1,8 +1,25 @@
 extends Node
 
 
+var _enemy_list: Dictionary = {}
+
+var bite: Dictionary = {
+	"name" : "Bite",
+	"damage" : 1,
+	"type" : ["physical"],
+	"critical_chance" : 0.0,
+}
+
+var canine: Dictionary = {
+	"max_health" : 5,
+	"move_speed" : 150,
+	"attack" : bite,
+	"danger_level" : 1,
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_enemy_list["canine"] = canine
 	pass # Replace with function body.
 
 
@@ -10,7 +27,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-var _enemy_list: Dictionary = {}
 
 # Return enemy dict for apprpriate danger level
 func get_enemy(danger_level: int) -> Dictionary:
