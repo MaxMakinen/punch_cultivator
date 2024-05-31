@@ -37,6 +37,8 @@ func get_enemy(danger_level: int) -> Dictionary:
 			potential_enemies.merge(enemy)
 	return potential_enemies
 
+func get_attack() -> Dictionary:
+	return canine["attack"]
 
 # TODO: Load enemy list from JSON file
 func load_enemy_list(enemy_list_path: String) -> void:

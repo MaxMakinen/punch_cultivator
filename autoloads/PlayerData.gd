@@ -44,6 +44,11 @@ func save_player() -> Dictionary:
 	save_dict["permanent_health_modifiers"] = get_permanent_health_modifiers()
 	return save_dict
 
+
+func get_attack() -> Dictionary:
+	return attack
+
+
 func get_max_health() -> float:
 	return _max_health
 
