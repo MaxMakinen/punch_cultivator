@@ -28,7 +28,6 @@ func get_resistances() -> Array:
 
 
 func _ready() -> void:
-	speed = Global.player_move_speed
 	health_bar.max_value = Global.player_max_health
 	equip_weapon(equipped_weapon)
 #	weapon = equipped_weapon.instantiate()
