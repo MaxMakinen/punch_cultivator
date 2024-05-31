@@ -17,7 +17,7 @@ var player_move_speed: float = 200.0
 
 var punch: Dictionary = {
 	"name" : "punch",
-	"damage" : 5,
+	"damage" : 5.0,
 	"scene" : PUNCHPLOSION,
 	"type" : ["physical"],
 	"critical_chance" : 0.1,
@@ -25,7 +25,7 @@ var punch: Dictionary = {
 
 var attack: Dictionary = {
 	"name" : "punch",
-	"damage" : 10,
+	"damage" : 10.0,
 	"type" : ["physical"],
 	"critical_chance" : 0.1,
 	"speed" : 250,
@@ -86,13 +86,28 @@ func can_resist(attack_types: Array, resistances: Array) -> bool:
 			if type in resistances:
 				return true
 	return false
-	
+
+
+# Calculate final damage by adding all modifiers to base damage and then multiply by temporary multipliers gotten from run
+func calculate_damage() -> float:
+	var base_damage : float = attack["damage"]
+	var perm_modifier : float = 0.0
+	var temp_multiplier : float = 1.0
+	var perm_modifiers : Dictionary = PlayerData.get_permanent_attack_modifiers()
+	var temp_multipliers : Dictionary = PlayerData.get_temporary_attack_multipliers()
+	for modifier in perm_modifiers:
+		perm_modifier += modifier["effect"]
+	for multiplier in temp_multipliers:
+		temp_multiplier += multiplier["effect"]
+
+	return (base_damage + perm_modifier) * temp_multiplier
 
 # Handle dealing damage, take in target and attack info. Apply calculated damage to target and return true if attack is valid or false if attack hits wall and should stop.
 func attack_handler(target: Node2D, attack: Dictionary) -> bool:
 	if target.has_method("get_resistances"):
 		var resistances: Array = target.get_resistances()
-		var damage = float(attack["damage"])
+		#var damage = float(attack["damage"])
+		var damage = calculate_damage()
 		if can_resist(attack["type"], resistances):
 			damage *= 0.5
 		var is_critical: bool
