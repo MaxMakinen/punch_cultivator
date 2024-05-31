@@ -75,8 +75,8 @@ text = "Upgrade Max Combo"
 layout_mode = 2
 text = "Upgrade Combo Speed"
 
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCooldown" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCooldown" to="." method="_on_upgrade_cooldown_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCooldown" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeSpeed" to="." method="_on_upgrade_speed_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCombo" to="." method="_on_upgrade_combo_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeComboSpeed" to="." method="_on_upgrade_combo_speed_pressed"]
