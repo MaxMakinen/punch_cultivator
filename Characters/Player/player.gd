@@ -17,6 +17,7 @@ var dir: Vector2 = Vector2.ZERO
 var weapon: Node2D
 var equipment: Array[Node2D] = []
 
+
 signal direction_changed(dir)
 signal death_signal()
 
@@ -27,6 +28,7 @@ func get_resistances() -> Array:
 
 
 func _ready() -> void:
+	speed = Global.player_move_speed
 	health_bar.max_value = Global.player_max_health
 	equip_weapon(equipped_weapon)
 #	weapon = equipped_weapon.instantiate()
@@ -58,6 +60,7 @@ func take_damage(damage: int, _is_critical: bool) -> void: #, enemy_position: Ve
 #		var blood_effect = GET_HURT_BLOOD.instantiate()
 #		blood_effect.initialize(self.position, (enemy_position - position).normalized())
 #		add_child(blood_effect)
+		sprite_flash()
 		Global.player_health -= damage
 		print("HEALTH: ", Global.player_health)
 		damage_cooldown.start()
@@ -79,3 +82,12 @@ func _on_pickup_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pickups"):
 		area.pull_to_player(self)
 
+# Flash the sprite white, Stop enemy movement ans animation during flash, used when taking damage.
+func sprite_flash() -> void:
+	var tween: Tween = create_tween()
+	#speed = 0
+	tween.tween_property(animated_sprite_2d, "modulate:v", 1, 0.25).from(15)
+	animated_sprite_2d.pause()
+	await tween.finished
+	#speed = MOVEMENT_SPEED
+	animated_sprite_2d.play()
