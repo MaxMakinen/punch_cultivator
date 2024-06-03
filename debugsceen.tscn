@@ -45,3 +45,6 @@ layout_mode = 2
 
 [node name="MaxCombo" type="Label" parent="ColorRect"]
 layout_mode = 2
+
+[node name="PermMods" type="Label" parent="ColorRect"]
+layout_mode = 2

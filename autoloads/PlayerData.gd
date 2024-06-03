@@ -159,6 +159,16 @@ func set_max_health(new_health: float) -> void:
 func set_max_combo(new_combo: float) -> void:
 	attack["combo_max"] += int(new_combo)
 
+func get_perm_mod_names() -> Array:
+	var names: Array = []
+	for mod in get_permanent_attack_modifiers():
+		names.append(mod["name"])
+	for mod in get_permanent_speed_modifiers():
+		names.append(mod["name"])
+	for mod in get_permanent_health_modifiers():
+		names.append(mod["name"])
+	return names
+
 
 # GET PERMANENT MODIFIERS ARRAY
 
@@ -238,6 +248,7 @@ func get_combo_mod() -> float:
 		if mult["type"] == "combo":
 			total += mult["modifier"]
 	return total
+
 
 # TEMPORARY MULTIPLIERS
 

@@ -7,6 +7,7 @@ extends Control
 @onready var move_speed: Label = $ColorRect/MoveSpeed
 @onready var cooldown_mult: Label = $ColorRect/CooldownMult
 @onready var max_combo: Label = $ColorRect/MaxCombo
+@onready var perm_mods: Label = $ColorRect/PermMods
 
 
 
@@ -19,3 +20,7 @@ func _process(_delta: float) -> void:
 	damage_mult.text = "Damage mult : " + str(PlayerData.get_atk_dmg_mult())
 	cooldown_mult.text = "Cooldown mult : " + str(PlayerData.get_cooldown_mult())
 	max_combo.text = "Max combo : " + str(PlayerData.get_combo_mod() + 2)
+	var names: Array = PlayerData.get_perm_mod_names()
+	perm_mods.text = "Perm Mods : "
+	for name in names:
+		perm_mods.text += name + "\n"
