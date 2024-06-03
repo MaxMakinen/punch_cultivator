@@ -54,7 +54,10 @@ var _max_health: float = 10.0
 var _move_speed: float = 200.0
 
 var _health: float = 10.0
-
+var _total_exp = 0
+var _experience = 0
+var _player_level = 0
+var _level_up_at = 10
 
 var _permanent_attack_modifiers: Array = []
 var _permanent_speed_modifiers: Array = []
@@ -92,6 +95,7 @@ func load_player(player_save: Dictionary) -> void:
 	set_permanent_speed_modifiers(player_save["permanent_speed_modifiers"])
 	set_permanent_health_modifiers(player_save["permanent_health_modifiers"])
 
+
 func save_player() -> Dictionary:
 	var save_dict: Dictionary = {}
 	save_dict["player_dict"] = player_dict
@@ -101,15 +105,34 @@ func save_player() -> Dictionary:
 	return save_dict
 
 
+func restart_player() -> void:
+	_health = 10
+	_total_exp = 0
+	_experience = 0
+	_player_level = 0
+	_level_up_at = 10
+
+
+func get_experience() -> float:
+	return _experience
+
+
+func get_total_experience() -> float:
+	return _total_exp
+
+
 func get_attack() -> Dictionary:
 	return attack
 
 
 func get_max_health() -> float:
-	return _max_health
+	return _max_health * get_health_mult()
 
 func get_health() -> float:
 	return _health
+
+func change_health(value: float) -> void:
+	_health += value
 
 func get_move_speed() -> float:
 	return _move_speed * get_move_mult()
@@ -126,6 +149,12 @@ func get_permanent_speed_modifiers() -> Array:
 func get_permanent_health_modifiers() -> Array:
 	return _permanent_health_modifiers
 
+func get_atk_dmg_mod() -> float:
+	var total: float = 0.0
+	for mult in _permanent_attack_modifiers:
+		if mult["type"] == "damage":
+			total += mult["multiplier"]
+	return total
 
 func set_permanent_attack_modifiers(modifiers) -> void:
 	_permanent_attack_modifiers = modifiers

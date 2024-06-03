@@ -5,8 +5,8 @@ const PUNCHPLOSION = preload("res://attacks/punchplosion.tscn")
 const LEVEL_UP = preload("res://menus/levelUp/level_up.tscn")
 
 var difficulty: int = 0
-var player_health: int = 10
-var player_max_health: int = 10
+#var player_health: int = 10
+#var player_max_health: int = 10
 
 var total_exp: int = 0
 var experience: int = 0
@@ -74,13 +74,13 @@ func _level_up() -> void:
 	level_up_at += level_up_at * 0.5
 	level_up.emit()
 
-func restart() -> void:
-	player_health = 10
-	player_max_health = 10
-	total_exp = 0
-	experience = 0
-	player_level = 0
-	level_up_at = 10
+#func restart() -> void:
+#	player_health = 10
+#	player_max_health = 10
+#	total_exp = 0
+#	experience = 0
+#	player_level = 0
+#	level_up_at = 10
 
 func can_resist(attack_types: Array, resistances: Array) -> bool:
 	if attack_types.size() > 0:
@@ -98,14 +98,13 @@ func calculate_damage(attack: Dictionary, target: Node2D) -> float:
 	var perm_modifier : float = 0.0
 	if not target.is_in_group("player"):
 		var perm_modifiers : Array = PlayerData.get_permanent_attack_modifiers()
-		var temp_multipliers : Array = PlayerData.get_temporary_attack_multipliers()
 		for modifier in perm_modifiers:
 			perm_modifier += modifier["effect"]
 		#for multiplier in temp_multipliers:
 		#	if multiplier["type"] == "attack":
 		#		temp_multiplier += multiplier["multiplier"]
 
-	return (base_damage + perm_modifier) * PlayerData.get_atk_dmg_mult()
+	return (base_damage + PlayerData.get_atk_dmg_mod()) * PlayerData.get_atk_dmg_mult()
 
 # Handle dealing damage, take in target and attack info. Apply calculated damage to target and return true if attack is valid or false if attack hits wall and should stop.
 func attack_handler(target: Node2D, attack: Dictionary) -> bool:

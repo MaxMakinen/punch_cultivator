@@ -13,7 +13,8 @@ func _input(event: InputEvent) -> void:
 func _on_restart_button_pressed() -> void:
 #	_restart.emit()
 	#print(owner.name)
-	Global.restart()
+	#Global.restart()
+	PlayerData.restart_player()
 	owner.get_tree().reload_current_scene()
 	#owner.get_tree().paused = false
 	#_unpause()

@@ -28,7 +28,7 @@ func get_resistances() -> Array:
 
 
 func _ready() -> void:
-	health_bar.max_value = Global.player_max_health
+	health_bar.max_value = PlayerData.get_max_health()
 	equip_weapon(equipped_weapon)
 #	weapon = equipped_weapon.instantiate()
 #	equipment.append(weapon)
@@ -61,14 +61,15 @@ func take_damage(damage: int, _is_critical: bool) -> void: #, enemy_position: Ve
 #		blood_effect.initialize(self.position, (enemy_position - position).normalized())
 #		add_child(blood_effect)
 		sprite_flash()
-		Global.player_health -= damage
-		print("HEALTH: ", Global.player_health)
+		PlayerData.change_health(-damage)
+		#Global.player_health -= damage
+		print("HEALTH: ", PlayerData.get_health())
 		damage_cooldown.start()
 
 
 func _check_health() -> void:
-	health_bar.value = Global.player_health
-	if Global.player_health <= 0:
+	health_bar.value = PlayerData.get_health()
+	if PlayerData.get_health() <= 0:
 		death_signal.emit()
 
 
