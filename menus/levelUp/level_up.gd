@@ -26,7 +26,7 @@ func populate_choices() -> void:
 		choices["button"] = buttons[index]
 		choices["multiplier"] = multipliers[index]
 
-func make_coice(choice: int) -> void:
+func make_choice(choice: int) -> void:
 	PlayerData.add_mult(multipliers[choice])
 
 func _unpause() -> void:
@@ -34,32 +34,25 @@ func _unpause() -> void:
 	hide()
 
 
-func _on_upgrade_cooldown_pressed() -> void:
-	player.get_weapun().upgrade_cooldown()
-	_unpause()
-
-func _on_upgrade_speed_pressed() -> void:
-	player.get_weapun().upgrade_speed()
-	_unpause()
-
-
-func _on_upgrade_combo_pressed() -> void:
-	player.get_weapun().upgrade_combo()
-	_unpause()
-
-
-
 #func upgrade_range(range_increase: float = 0.1) -> void:
 #	attack["range"] += range_increase
 
 
 func _on_button_1_pressed() -> void:
-	pass # Replace with function body.
+	make_choice(1)
+	_unpause()
 
 
 func _on_button_2_pressed() -> void:
-	pass # Replace with function body.
+	make_choice(2)
+	_unpause()
 
 
 func _on_button_3_pressed() -> void:
-	pass # Replace with function body.
+	make_choice(3)
+	_unpause()
+
+
+func _on_button_4_pressed() -> void:
+	make_choice(4)
+	_unpause()

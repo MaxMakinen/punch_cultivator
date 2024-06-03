@@ -78,3 +78,4 @@ text = "UNUSED"
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
