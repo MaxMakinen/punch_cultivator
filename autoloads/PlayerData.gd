@@ -15,22 +15,37 @@ var attack: Dictionary = {
 
 var atk_up_mult: Dictionary = {
 	"ID" : "atk_up_mult",
-	"name" : "attack power boost",
+	"name" : "attack power boost by 10%",
 	"multiplier" : 0.1
 }
 
 var speed_up_mult: Dictionary = {
 	"ID" : "speed_up_mult",
-	"name" : "movement speed boost",
+	"name" : "movement speed boost by 10%",
 	"multiplier" : 0.1
 }
 
 var cooldown_down_mult: Dictionary = {
 	"ID" : "cooldown_down_mult",
-	"name" : "cooldown lowered",
+	"name" : "cooldown lowered by 10%",
 	"multiplier" : 0.1
 }
 
+var health_up_mult: Dictionary = {
+	"ID" : "health_up_mult",
+	"name" : "increase health 10%",
+	"multiplier" : 0.1
+}
+
+func add_mult(multiplier: Dictionary) -> void:
+	if multiplier["ID"] == "atk_up_mult":
+		add_to_temporary_attack_multipliers(multiplier)
+	elif multiplier["ID"] == "cooldown_down_mult":
+		add_to_temporary_attack_multipliers(multiplier)
+	elif multiplier["ID"] == "speed_up_mult":
+		add_to_temporary_speed_multipliers(multiplier)
+	elif multiplier["ID"] == "health_up_mult":
+		add_to_temporary_health_multipliers(multiplier)
 
 var player_dict: Dictionary
 
@@ -47,7 +62,7 @@ var _temporary_health_multipliers: Dictionary = {}
 
 
 func get_multipliers() -> Array:
-	return [atk_up_mult, speed_up_mult, cooldown_down_mult]
+	return [atk_up_mult, speed_up_mult, cooldown_down_mult, health_up_mult]
 
 
 func load_player(player_save: Dictionary) -> void:
