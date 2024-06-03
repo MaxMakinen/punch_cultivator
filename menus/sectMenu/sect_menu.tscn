@@ -73,6 +73,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ModDescription" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(208, 23)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Boost Information"
