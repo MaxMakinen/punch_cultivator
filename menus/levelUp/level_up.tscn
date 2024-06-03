@@ -61,19 +61,19 @@ text = "Level Up"
 
 [node name="Button1" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Upgrade Cooldown"
+text = "Button 1"
 
 [node name="Button2" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Upgrade Attack Speed"
+text = "Button 2"
 
 [node name="Button3" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Upgrade Max Combo"
+text = "Button 3"
 
 [node name="Button4" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "UNUSED"
+text = "Button 4"
 
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
