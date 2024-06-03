@@ -8,6 +8,7 @@ var atk_up_mod: Dictionary = {
 	"description" : "Attack damage increased by 5",
 	"modifier" : 5,
 	"type" : "damage",
+	"family" : "attack",
 }
 
 var speed_up_mod: Dictionary = {
@@ -16,6 +17,7 @@ var speed_up_mod: Dictionary = {
 	"description" : "Movement speed boost by 50",
 	"modifier" : 50,
 	"type" : "move_speed",
+	"family" : "speed",
 }
 
 var cooldown_down_mod: Dictionary = {
@@ -24,6 +26,7 @@ var cooldown_down_mod: Dictionary = {
 	"description" : "Cooldown lowered by 0.2 seconds",
 	"modifier" : 0.2,
 	"type" : "cooldown",
+	"family" : "attack",
 }
 
 var health_up_mod: Dictionary = {
@@ -32,6 +35,7 @@ var health_up_mod: Dictionary = {
 	"description" : "Increase health by 5 HP",
 	"modifier" : 5,
 	"type" : "health",
+	"family" : "health",
 }
 
 var combo_up_mod: Dictionary = {
@@ -40,6 +44,7 @@ var combo_up_mod: Dictionary = {
 	"description" : "Increase max combo by 1",
 	"modifier" : 1,
 	"type" : "combo",
+	"family" : "attack",
 }
 
 func get_mods() -> Array:
