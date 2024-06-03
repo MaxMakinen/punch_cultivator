@@ -49,9 +49,13 @@ var player_health: int = 10
 var player_max_health: int = 10
 var player_move_speed: float = 200.0
 
+# TODO: Should the base values be constants?
 var _max_health: float = 10.0
-var _health: float = 10.0
 var _move_speed: float = 200.0
+
+var _health: float = 10.0
+
+
 var _permanent_attack_modifiers: Array = []
 var _permanent_speed_modifiers: Array = []
 var _permanent_health_modifiers: Array = []
@@ -185,6 +189,14 @@ func get_health_mult() -> float:
 	var total: float = 1.0
 	for mult in _temporary_health_multipliers:
 		total += mult["multiplier"]
+	return total
+
+
+func get_cooldown_mult() -> float:
+	var total: float = 1.0
+	for mult in _temporary_attack_multipliers:
+		if mult["type"] == "cooldown":
+			total -= mult["multiplier"]
 	return total
 
 

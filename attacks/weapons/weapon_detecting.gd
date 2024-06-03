@@ -77,9 +77,10 @@ func shoot() -> void:
 	_start_timers()
 
 func _start_timers() -> void:
-	combo_timer.start(attack["combo_cooldown"])
+	var cooldown_len: float = attack["cooldown"] * PlayerData.get_cooldown_mult()
+	combo_timer.start(cooldown_len / 3)
 	if cooldown_timer.is_stopped():
-		cooldown_timer.start(attack["cooldown"])
+		cooldown_timer.start(cooldown_len)
 
 func attack_finished() -> void:
 	can_attack = true
