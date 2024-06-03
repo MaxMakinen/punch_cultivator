@@ -13,7 +13,7 @@ var experience: int = 0
 var player_level: int = 0
 var level_up_at = 3
 
-var player_move_speed: float = 200.0
+
 
 var punch: Dictionary = {
 	"name" : "punch",
@@ -89,22 +89,23 @@ func can_resist(attack_types: Array, resistances: Array) -> bool:
 				return true
 	return false
 
+#func get_move_speed() -> float:
+#	return player_move_speed * PlayerData.get_move_mult()
 
 # Calculate final damage by adding all modifiers to base damage and then multiply by temporary multipliers gotten from run
 func calculate_damage(attack: Dictionary, target: Node2D) -> float:
 	var base_damage : float = attack["damage"]
 	var perm_modifier : float = 0.0
-	var temp_multiplier : float = 1.0
 	if not target.is_in_group("player"):
 		var perm_modifiers : Array = PlayerData.get_permanent_attack_modifiers()
 		var temp_multipliers : Array = PlayerData.get_temporary_attack_multipliers()
 		for modifier in perm_modifiers:
 			perm_modifier += modifier["effect"]
-		for multiplier in temp_multipliers:
-			if multiplier["type"] == "attack":
-				temp_multiplier += multiplier["multiplier"]
+		#for multiplier in temp_multipliers:
+		#	if multiplier["type"] == "attack":
+		#		temp_multiplier += multiplier["multiplier"]
 
-	return (base_damage + perm_modifier) * temp_multiplier
+	return (base_damage + perm_modifier) * PlayerData.get_atk_dmg_mult()
 
 # Handle dealing damage, take in target and attack info. Apply calculated damage to target and return true if attack is valid or false if attack hits wall and should stop.
 func attack_handler(target: Node2D, attack: Dictionary) -> bool:

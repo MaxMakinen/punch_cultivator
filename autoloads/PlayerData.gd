@@ -15,31 +15,52 @@ var attack: Dictionary = {
 
 var atk_up_mult: Dictionary = {
 	"ID" : "atk_up_mult",
-	"name" : "attack power boost by 10%",
+	"name" : "Attack power boost by 10%",
 	"multiplier" : 0.1,
 	"type" : "damage",
 }
 
 var speed_up_mult: Dictionary = {
 	"ID" : "speed_up_mult",
-	"name" : "movement speed boost by 10%",
+	"name" : "Movement speed boost by 10%",
 	"multiplier" : 0.1,
 	"type" : "move_speed",
 }
 
 var cooldown_down_mult: Dictionary = {
 	"ID" : "cooldown_down_mult",
-	"name" : "cooldown lowered by 10%",
+	"name" : "Cooldown lowered by 10%",
 	"multiplier" : 0.1,
 	"type" : "cooldown",
 }
 
 var health_up_mult: Dictionary = {
 	"ID" : "health_up_mult",
-	"name" : "increase health 10%",
+	"name" : "Increase health 10%",
 	"multiplier" : 0.1,
 	"type" : "health",
 }
+
+
+
+var player_dict: Dictionary
+
+var player_health: int = 10
+var player_max_health: int = 10
+var player_move_speed: float = 200.0
+
+var _max_health: float = 10.0
+var _health: float = 10.0
+var _move_speed: float = 200.0
+var _permanent_attack_modifiers: Array = []
+var _permanent_speed_modifiers: Array = []
+var _permanent_health_modifiers: Array = []
+
+
+var _temporary_attack_multipliers: Array = []
+var _temporary_speed_multipliers: Array = []
+var _temporary_health_multipliers: Array = []
+
 
 func add_mult(multiplier: Dictionary) -> void:
 	if multiplier["ID"] == "atk_up_mult":
@@ -50,19 +71,6 @@ func add_mult(multiplier: Dictionary) -> void:
 		add_to_temporary_speed_multipliers(multiplier)
 	elif multiplier["ID"] == "health_up_mult":
 		add_to_temporary_health_multipliers(multiplier)
-
-var player_dict: Dictionary
-
-var _max_health: float
-var _move_speed: float
-var _permanent_attack_modifiers: Dictionary = {}
-var _permanent_speed_modifiers: Dictionary = {}
-var _permanent_health_modifiers: Dictionary = {}
-
-
-var _temporary_attack_multipliers: Dictionary = {}
-var _temporary_speed_multipliers: Dictionary = {}
-var _temporary_health_multipliers: Dictionary = {}
 
 
 func get_multipliers() -> Array:
@@ -96,20 +104,22 @@ func get_attack() -> Dictionary:
 func get_max_health() -> float:
 	return _max_health
 
+func get_health() -> float:
+	return _health
 
 func get_move_speed() -> float:
-	return _move_speed
+	return _move_speed * get_move_mult()
 
 
-func get_permanent_attack_modifiers() -> Dictionary:
+func get_permanent_attack_modifiers() -> Array:
 	return _permanent_attack_modifiers
 
 
-func get_permanent_speed_modifiers() -> Dictionary:
+func get_permanent_speed_modifiers() -> Array:
 	return _permanent_speed_modifiers
 
 
-func get_permanent_health_modifiers() -> Dictionary:
+func get_permanent_health_modifiers() -> Array:
 	return _permanent_health_modifiers
 
 
@@ -126,27 +136,27 @@ func set_permanent_health_modifiers(modifiers) -> void:
 
 
 func add_to_permanent_attack_modifiers(new_modifier) -> void:
-	_permanent_attack_modifiers.merge(new_modifier)
+	_permanent_attack_modifiers.append(new_modifier)
 
 
 func add_to_permanent_speed_modifiers(new_modifier) -> void:
-	_permanent_speed_modifiers.merge(new_modifier)
+	_permanent_speed_modifiers.append(new_modifier)
 
 
 func add_to_permanent_health_modifiers(new_modifier) -> void:
-	_permanent_health_modifiers.merge(new_modifier)
+	_permanent_health_modifiers.append(new_modifier)
 
 # TEMPORARY MULTIPLIERS
 
-func get_temporary_attack_multipliers() -> Dictionary:
+func get_temporary_attack_multipliers() -> Array:
 	return _temporary_attack_multipliers
 
 
-func get_temporary_speed_multipliers() -> Dictionary:
+func get_temporary_speed_multipliers() -> Array:
 	return _temporary_speed_multipliers
 
 
-func get_temporary_health_multipliers() -> Dictionary:
+func get_temporary_health_multipliers() -> Array:
 	return _temporary_health_multipliers
 
 # TEMPORARY MULTIPLIER TOTALS
@@ -158,22 +168,36 @@ func get_mult_total(temporary_multipliers: Dictionary) -> float:
 	return total
 
 func get_atk_dmg_mult() -> float:
-	var total: float = 0.0
+	var total: float = 1.0
 	for mult in _temporary_attack_multipliers:
 		if mult["type"] == "damage":
 			total += mult["multiplier"]
 	return total
 
+func get_move_mult() -> float:
+	var total: float = 1.0
+	for mult in _temporary_speed_multipliers:
+		total += mult["multiplier"]
+	return total
+
+
+func get_health_mult() -> float:
+	var total: float = 1.0
+	for mult in _temporary_health_multipliers:
+		total += mult["multiplier"]
+	return total
+
+
 func add_to_temporary_attack_multipliers(new_modifier) -> void:
-	_temporary_attack_multipliers.merge(new_modifier)
+	_temporary_attack_multipliers.append(new_modifier)
 
 
 func add_to_temporary_speed_multipliers(new_modifier) -> void:
-	_temporary_speed_multipliers.merge(new_modifier)
+	_temporary_speed_multipliers.append(new_modifier)
 
 
 func add_to_temporary_health_multipliers(new_modifier) -> void:
-	_temporary_health_multipliers.merge(new_modifier)
+	_temporary_health_multipliers.append(new_modifier)
 
 
 func clear_temporary_multipliers() -> void:

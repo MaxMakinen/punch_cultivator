@@ -41,7 +41,8 @@ func equip_weapon(new_weapon: PackedScene) -> void:
 
 func _get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * Global.player_move_speed
+	#velocity = input_direction * Global.player_move_speed
+	velocity = input_direction * PlayerData.get_move_speed()
 	if input_direction != Vector2.ZERO:
 		dir = input_direction.normalized()
 		direction_changed.emit(dir)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://fl0bie5hpx0p"]
+[gd_scene load_steps=12 format=3 uid="uid://fl0bie5hpx0p"]
 
 [ext_resource type="PackedScene" uid="uid://cqoh3q1s6e336" path="res://characters/Player/player.tscn" id="1_hskar"]
 [ext_resource type="Texture2D" uid="uid://djk51kjara7nh" path="res://assets/Generic Texture Tiles/Textures-16.png" id="1_mtyr6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dm5q4yr7rt1s2" path="res://maps/EnemySpawner/enemy_spawner.tscn" id="6_krv4f"]
 [ext_resource type="PackedScene" uid="uid://d3lu5n0tjmrx2" path="res://menus/mainMenu/main_menu.tscn" id="6_trnwl"]
 [ext_resource type="PackedScene" uid="uid://bn5smhghx01wo" path="res://menus/levelUp/level_up.tscn" id="8_wtccm"]
+[ext_resource type="PackedScene" uid="uid://dkhrvdtiinn75" path="res://debugsceen.tscn" id="9_30rek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi87d"]
 texture = ExtResource("1_mtyr6")
@@ -549,5 +550,9 @@ offset_left = 479.0
 offset_top = -127.0
 offset_right = 519.0
 offset_bottom = -104.0
+
+[node name="DEBUGSCREEN" parent="Camera2D/UIRoot" instance=ExtResource("9_30rek")]
+offset_left = 494.0
+offset_right = 494.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

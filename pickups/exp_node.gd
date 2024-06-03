@@ -15,7 +15,7 @@ func initialize(pos: Vector2, value: int = 1) -> void:
 func _process(delta: float) -> void:
 	if pulled:
 		var direction = target.position - position
-		speed = move_toward(speed, Global.player_move_speed + 10, ACCEL)
+		speed = move_toward(speed, PlayerData.get_move_speed() + 10, ACCEL)
 		position += direction.normalized() * speed * delta
 
 

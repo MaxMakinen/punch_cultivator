@@ -34,7 +34,7 @@ func get_enemy(danger_level: int) -> Dictionary:
 	for enemy in _enemy_list:
 		if enemy["danger_level"] == danger_level:
 			return enemy
-			potential_enemies.merge(enemy)
+			#potential_enemies.merge(enemy)
 	return potential_enemies
 
 func get_attack() -> Dictionary:
