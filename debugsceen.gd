@@ -6,6 +6,7 @@ extends Control
 @onready var health_mult: Label = $ColorRect/HealthMult
 @onready var move_speed: Label = $ColorRect/MoveSpeed
 @onready var cooldown_mult: Label = $ColorRect/CooldownMult
+@onready var max_combo: Label = $ColorRect/MaxCombo
 
 
 
@@ -17,3 +18,4 @@ func _process(_delta: float) -> void:
 	move_mult.text = "Move mult : " + str(PlayerData.get_move_mult())
 	damage_mult.text = "Damage mult : " + str(PlayerData.get_atk_dmg_mult())
 	cooldown_mult.text = "Cooldown mult : " + str(PlayerData.get_cooldown_mult())
+	max_combo.text = "Max combo : " + str(PlayerData.get_combo_mod() + 2)

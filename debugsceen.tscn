@@ -42,3 +42,6 @@ layout_mode = 2
 
 [node name="CooldownMult" type="Label" parent="ColorRect"]
 layout_mode = 2
+
+[node name="MaxCombo" type="Label" parent="ColorRect"]
+layout_mode = 2
