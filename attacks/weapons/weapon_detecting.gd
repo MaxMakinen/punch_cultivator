@@ -51,7 +51,7 @@ func _attack() -> void:
 		if can_attack:
 			_aim(target.position)
 			if combo_timer.is_stopped():
-				if cooldown_timer.is_stopped() or combo_spent < attack["combo_max"]:
+				if cooldown_timer.is_stopped() or combo_spent < PlayerData.attack["combo_max"]:
 					shoot()
 
 
