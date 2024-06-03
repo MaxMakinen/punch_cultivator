@@ -24,12 +24,13 @@ func _on_restart_button_pressed() -> void:
 func _on_quit_button_pressed() -> void:
 #	_quit.emit()
 	#get_tree().quit()
+	_unpause()
 	get_tree().change_scene_to_file("res://menus/mainMenu/main_menu.tscn")
 	print("QUIT")
 
 
 func _on_continue_button_pressed() -> void:
-	if Global.player_health > 0:
+	if PlayerData.get_health() > 0:
 		_unpause()
 
 
