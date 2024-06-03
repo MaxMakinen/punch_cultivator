@@ -28,6 +28,7 @@ func get_resistances() -> Array:
 
 
 func _ready() -> void:
+	PlayerData.build_player()
 	health_bar.max_value = PlayerData.get_max_health()
 	equip_weapon(equipped_weapon)
 #	weapon = equipped_weapon.instantiate()
