@@ -31,6 +31,10 @@ var attack: Dictionary = {
 	"combo_max" : 2,
 }
 
+var atk_multiplier: float = 1.0
+
+
+
 func get_deets() -> Dictionary:
 	return attack
 
@@ -61,6 +65,17 @@ func _attack_possible() -> bool:
 	if enemy_in_attack_zone == true:
 		return true
 	return false
+
+func _prep_attack() -> Dictionary:
+	var atk: Dictionary = {
+	"name" : "punch",
+	"damage" : attack["damage"] * atk_multiplier,
+	"type" : attack["type"],
+	"critical_chance" : attack["critical_chance"],
+	"speed" : attack["speed"],
+	"range" : attack["range"],
+	}
+	return atk
 
 func shoot() -> void:
 	can_attack = false
@@ -122,6 +137,9 @@ func _on_cooldown_timer_timeout() -> void:
 	can_attack = true
 	combo_spent = 0
 
+func upgrade_shit() -> void:
+	atk_multiplier = 1.0 + PlayerData.get_atk_dmg_mult()
+	pass
 
 func upgrade_amount() -> void:
 	attack["cooldown"] *= 0.9

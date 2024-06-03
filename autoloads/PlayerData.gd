@@ -16,25 +16,29 @@ var attack: Dictionary = {
 var atk_up_mult: Dictionary = {
 	"ID" : "atk_up_mult",
 	"name" : "attack power boost by 10%",
-	"multiplier" : 0.1
+	"multiplier" : 0.1,
+	"type" : "damage",
 }
 
 var speed_up_mult: Dictionary = {
 	"ID" : "speed_up_mult",
 	"name" : "movement speed boost by 10%",
-	"multiplier" : 0.1
+	"multiplier" : 0.1,
+	"type" : "move_speed",
 }
 
 var cooldown_down_mult: Dictionary = {
 	"ID" : "cooldown_down_mult",
 	"name" : "cooldown lowered by 10%",
-	"multiplier" : 0.1
+	"multiplier" : 0.1,
+	"type" : "cooldown",
 }
 
 var health_up_mult: Dictionary = {
 	"ID" : "health_up_mult",
 	"name" : "increase health 10%",
-	"multiplier" : 0.1
+	"multiplier" : 0.1,
+	"type" : "health",
 }
 
 func add_mult(multiplier: Dictionary) -> void:
@@ -153,7 +157,12 @@ func get_mult_total(temporary_multipliers: Dictionary) -> float:
 		total += mult["multiplier"]
 	return total
 
-
+func get_atk_dmg_mult() -> float:
+	var total: float = 0.0
+	for mult in _temporary_attack_multipliers:
+		if mult["type"] == "damage":
+			total += mult["multiplier"]
+	return total
 
 func add_to_temporary_attack_multipliers(new_modifier) -> void:
 	_temporary_attack_multipliers.merge(new_modifier)
