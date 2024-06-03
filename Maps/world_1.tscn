@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bfoe7iyc7v1ne" path="res://characters/Enemies/Canine/canine.tscn" id="2_q3o53"]
 [ext_resource type="PackedScene" uid="uid://c0halqfs0qu4a" path="res://attacks/weapons/weapon_detecting.tscn" id="4_v67op"]
 [ext_resource type="PackedScene" uid="uid://dm5q4yr7rt1s2" path="res://maps/EnemySpawner/enemy_spawner.tscn" id="6_krv4f"]
-[ext_resource type="PackedScene" uid="uid://d3lu5n0tjmrx2" path="res://menus/mainMenu/main_menu.tscn" id="6_trnwl"]
+[ext_resource type="PackedScene" uid="uid://d3lu5n0tjmrx2" path="res://menus/pauseMenu/pause_menu.tscn" id="6_trnwl"]
 [ext_resource type="PackedScene" uid="uid://bn5smhghx01wo" path="res://menus/levelUp/level_up.tscn" id="8_wtccm"]
 [ext_resource type="PackedScene" uid="uid://dkhrvdtiinn75" path="res://debugsceen.tscn" id="9_30rek"]
 
