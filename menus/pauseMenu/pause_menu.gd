@@ -23,7 +23,8 @@ func _on_restart_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 #	_quit.emit()
-	get_tree().quit()
+	#get_tree().quit()
+	get_tree().change_scene_to_file("res://menus/mainMenu/main_menu.tscn")
 	print("QUIT")
 
 

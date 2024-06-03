@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c121maum5skby"]
+
+[ext_resource type="Script" path="res://menus/sectMenu/PermModButton.gd" id="1_dya0y"]
+
+[node name="PermModButton" type="Button"]
+custom_minimum_size = Vector2(208, 31)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_dya0y")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

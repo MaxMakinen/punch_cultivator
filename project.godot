@@ -22,6 +22,7 @@ DamageNumbers="*res://autoloads/DamageNumbers.gd"
 PlayerData="*res://autoloads/PlayerData.gd"
 EnemyData="*res://autoloads/EnemyData.gd"
 TempMults="*res://autoloads/TempMults.gd"
+PermMods="*res://autoloads/PermMods.gd"
 
 [editor]
 
