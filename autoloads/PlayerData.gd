@@ -13,6 +13,25 @@ var attack: Dictionary = {
 	"combo_max" : 2,
 }
 
+var atk_up_mult: Dictionary = {
+	"ID" : "atk_up_mult",
+	"name" : "attack power boost",
+	"multiplier" : 0.1
+}
+
+var speed_up_mult: Dictionary = {
+	"ID" : "speed_up_mult",
+	"name" : "movement speed boost",
+	"multiplier" : 0.1
+}
+
+var cooldown_down_mult: Dictionary = {
+	"ID" : "cooldown_down_mult",
+	"name" : "cooldown lowered",
+	"multiplier" : 0.1
+}
+
+
 var player_dict: Dictionary
 
 var _max_health: float
@@ -25,6 +44,11 @@ var _permanent_health_modifiers: Dictionary = {}
 var _temporary_attack_multipliers: Dictionary = {}
 var _temporary_speed_multipliers: Dictionary = {}
 var _temporary_health_multipliers: Dictionary = {}
+
+
+func get_multipliers() -> Array:
+	return [atk_up_mult, speed_up_mult, cooldown_down_mult]
+
 
 func load_player(player_save: Dictionary) -> void:
 	# Load player base details from save dict
