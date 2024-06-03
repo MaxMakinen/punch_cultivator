@@ -20,6 +20,7 @@ func initialize(perm_mod: Dictionary) -> void:
 func _on_pressed() -> void:
 	PlayerData.add_to_perm_mods(modifier)
 	disabled = true
+	get_tree().change_scene_to_file("res://menus/sectMenu/sect_menu.tscn")
 
 
 func get_description() -> String:
