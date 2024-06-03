@@ -5,6 +5,9 @@ extends Control
 @onready var quit_button: Button = $ColorRect/MarginContainer/VBoxContainer/QuitButton
 @onready var parallax_background: ParallaxBackground = $ParallaxBackground
 
+func ready() -> void:
+	if get_tree().paused:
+		get_tree().paused = false
 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://menus/sectMenu/sect_menu.tscn")
@@ -17,6 +20,7 @@ func _on_load_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
 	print("QUIT")
 
