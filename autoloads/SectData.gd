@@ -16,7 +16,7 @@ func add_elder(new_elder: Dictionary) -> void:
 	var prepared_elder: Dictionary
 	prepared_elder["contribution"] = new_elder["total_exp"] * 0.5
 	prepared_elder["name"] = "Elder #" + str(_honorable_elders.size())
-	_honorable_elders.append(new_elder)
+	_honorable_elders.append(prepared_elder)
 	_update_honor()
 
 func add_dead(new_dead: Dictionary) -> void:
