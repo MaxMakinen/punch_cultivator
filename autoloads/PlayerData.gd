@@ -145,6 +145,14 @@ func get_temporary_speed_multipliers() -> Dictionary:
 func get_temporary_health_multipliers() -> Dictionary:
 	return _temporary_health_multipliers
 
+# TEMPORARY MULTIPLIER TOTALS
+
+func get_mult_total(temporary_multipliers: Dictionary) -> float:
+	var total: float = 0.0
+	for mult in temporary_multipliers:
+		total += mult["multiplier"]
+	return total
+
 
 
 func add_to_temporary_attack_multipliers(new_modifier) -> void:
