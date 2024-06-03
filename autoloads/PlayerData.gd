@@ -88,11 +88,19 @@ func save_shit() -> void:
 	save_game.store_line(save_string)
 
 func restart_player() -> void:
-	_health = 10
+	_health = _max_health
 	_total_exp = 0
 	_experience = 0
 	_player_level = 0
 	_level_up_at = 10
+
+
+func build_player() -> void:
+	set_move_speed(get_move_mod())
+	set_max_health(get_health_mod())
+	set_max_combo(get_combo_mod())
+	_health = _max_health
+
 
 #	PLAYER EXPERIENCE
 
@@ -151,10 +159,6 @@ func set_max_health(new_health: float) -> void:
 func set_max_combo(new_combo: float) -> void:
 	attack["combo_max"] += int(new_combo)
 
-func build_player() -> void:
-	set_move_speed(get_move_mod())
-	set_max_health(get_health_mod())
-	set_max_combo(get_combo_mod())
 
 # GET PERMANENT MODIFIERS ARRAY
 
