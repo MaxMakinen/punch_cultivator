@@ -29,7 +29,7 @@ func _ready() -> void:
 	get_tree().paused = false
 	main_menu.hide()
 	level_up.hide()
-	Global.level_up.connect(_leveling_up)
+	PlayerData.level_up.connect(_leveling_up)
 	player.death_signal.connect(_pause)
 	level_timer.start(time * 60)
 	weapon = player.get_weapon()
@@ -57,10 +57,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _check_exp() -> void:
-	exp_bar.max_value = Global.level_up_at
-	exp_bar.value = Global.get_exp()
-	exp_number.text = "EXP : " + str(Global.get_total_exp())
-	level_indicator.text = "Level : " + str(Global.get_level())
+	exp_bar.max_value = PlayerData.get_lvl_up_at()
+	exp_bar.value = PlayerData.get_experience()
+	exp_number.text = "EXP : " + str(PlayerData.get_total_experience())
+	level_indicator.text = "Level : " + str(PlayerData.get_level())
 	
 
 func _pause() -> void:

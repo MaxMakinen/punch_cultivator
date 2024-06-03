@@ -42,6 +42,9 @@ var health_up_mult: Dictionary = {
 }
 
 
+const LEVEL_UP = preload("res://menus/levelUp/level_up.tscn")
+
+signal level_up()
 
 var player_dict: Dictionary
 
@@ -112,6 +115,7 @@ func restart_player() -> void:
 	_player_level = 0
 	_level_up_at = 10
 
+#	PLAYER EXPERIENCE
 
 func get_experience() -> float:
 	return _experience
@@ -119,6 +123,28 @@ func get_experience() -> float:
 
 func get_total_experience() -> float:
 	return _total_exp
+
+func change_experience(value: float) -> void:
+	_experience += value
+	_total_exp += value
+	if _experience >= _level_up_at:
+		_level_up()
+
+func get_lvl_up_at() -> float:
+	return _level_up_at
+
+func get_level() -> float:
+	return _player_level
+
+# Handle leveling up the character
+func _level_up() -> void:
+	# increase player level
+	_player_level += 1
+	# Reset experience for level up counter
+	_experience = 0
+	# Increase new level up limit by half of current
+	_level_up_at += _level_up_at * 0.5
+	level_up.emit()
 
 
 func get_attack() -> Dictionary:
