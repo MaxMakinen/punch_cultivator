@@ -142,6 +142,21 @@ func change_health(value: float) -> void:
 func get_move_speed() -> float:
 	return _move_speed * get_move_mult()
 
+func set_move_speed(new_speed: float) -> void:
+	_move_speed += new_speed
+
+func set_max_health(new_health: float) -> void:
+	_max_health += new_health
+
+func set_max_combo(new_combo: float) -> void:
+	attack["combo_max"] += int(new_combo)
+
+func build_player() -> void:
+	set_move_speed(get_move_mod())
+	set_max_health(get_health_mod())
+	set_max_combo(get_combo_mod())
+
+# GET PERMANENT MODIFIERS ARRAY
 
 func get_permanent_attack_modifiers() -> Array:
 	return _permanent_attack_modifiers
@@ -154,35 +169,71 @@ func get_permanent_speed_modifiers() -> Array:
 func get_permanent_health_modifiers() -> Array:
 	return _permanent_health_modifiers
 
+# SET PERMANENT MODIFIERS ARRAY
+
+func set_permanent_attack_modifiers(modifiers: Array) -> void:
+	_permanent_attack_modifiers = modifiers
+
+
+func set_permanent_speed_modifiers(modifiers: Array) -> void:
+	_permanent_speed_modifiers = modifiers
+
+
+func set_permanent_health_modifiers(modifiers: Array) -> void:
+	_permanent_health_modifiers = modifiers
+
+# ADDING PERM MODIFIERS
+
+func add_to_permanent_attack_modifiers(new_modifier: Dictionary) -> void:
+	_permanent_attack_modifiers.append(new_modifier)
+
+
+func add_to_permanent_speed_modifiers(new_modifier: Dictionary) -> void:
+	_permanent_speed_modifiers.append(new_modifier)
+
+
+func add_to_permanent_health_modifiers(new_modifier: Dictionary) -> void:
+	_permanent_health_modifiers.append(new_modifier)
+
+
+func add_to_perm_mods(new_modifier: Dictionary) -> void:
+	if new_modifier["family"] == "attack":
+		add_to_permanent_attack_modifiers(new_modifier)
+	elif new_modifier["family"] == "speed":
+		add_to_permanent_speed_modifiers(new_modifier)
+	elif new_modifier["family"] == "health":
+		add_to_permanent_health_modifiers(new_modifier)
+
+# PERMANENT MODIFIER TOTALS
+
+
 func get_atk_dmg_mod() -> float:
 	var total: float = 0.0
 	for mult in _permanent_attack_modifiers:
 		if mult["type"] == "damage":
-			total += mult["multiplier"]
+			total += mult["modifier"]
 	return total
 
-func set_permanent_attack_modifiers(modifiers) -> void:
-	_permanent_attack_modifiers = modifiers
+
+func get_move_mod() -> float:
+	var total: float = 0.0
+	for mult in _permanent_speed_modifiers:
+		total += mult["modifier"]
+	return total
 
 
-func set_permanent_speed_modifiers(modifiers) -> void:
-	_permanent_speed_modifiers = modifiers
+func get_health_mod() -> float:
+	var total: float = 0.0
+	for mult in _permanent_health_modifiers:
+		total += mult["modifier"]
+	return total
 
-
-func set_permanent_health_modifiers(modifiers) -> void:
-	_permanent_health_modifiers = modifiers
-
-
-func add_to_permanent_attack_modifiers(new_modifier) -> void:
-	_permanent_attack_modifiers.append(new_modifier)
-
-
-func add_to_permanent_speed_modifiers(new_modifier) -> void:
-	_permanent_speed_modifiers.append(new_modifier)
-
-
-func add_to_permanent_health_modifiers(new_modifier) -> void:
-	_permanent_health_modifiers.append(new_modifier)
+func get_combo_mod() -> float:
+	var total: float = 0.0
+	for mult in _permanent_attack_modifiers:
+		if mult["type"] == "combo":
+			total += mult["modifier"]
+	return total
 
 # TEMPORARY MULTIPLIERS
 
