@@ -10,7 +10,7 @@ extends Control
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	max_health.text = "Max health : " + str(PlayerData.get_max_health())
 	health_mult.text = "Health mult : " + str(PlayerData.get_health_mult())
 	move_speed.text = "MoveSpeed : " + str(PlayerData.get_move_speed())
