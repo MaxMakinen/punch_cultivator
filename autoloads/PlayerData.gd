@@ -13,36 +13,10 @@ var attack: Dictionary = {
 	"combo_max" : 2,
 }
 
-var atk_up_mult: Dictionary = {
-	"ID" : "atk_up_mult",
-	"name" : "Attack power boost by 10%",
-	"multiplier" : 0.1,
-	"type" : "damage",
-}
-
-var speed_up_mult: Dictionary = {
-	"ID" : "speed_up_mult",
-	"name" : "Movement speed boost by 10%",
-	"multiplier" : 0.1,
-	"type" : "move_speed",
-}
-
-var cooldown_down_mult: Dictionary = {
-	"ID" : "cooldown_down_mult",
-	"name" : "Cooldown lowered by 10%",
-	"multiplier" : 0.1,
-	"type" : "cooldown",
-}
-
-var health_up_mult: Dictionary = {
-	"ID" : "health_up_mult",
-	"name" : "Increase health 10%",
-	"multiplier" : 0.1,
-	"type" : "health",
-}
 
 
-const LEVEL_UP = preload("res://menus/levelUp/level_up.tscn")
+
+#const LEVEL_UP = preload("res://menus/levelUp/level_up.tscn")
 
 signal level_up()
 
@@ -84,15 +58,12 @@ func add_mult(multiplier: Dictionary) -> void:
 
 
 func get_multipliers() -> Array:
-	return [atk_up_mult, speed_up_mult, cooldown_down_mult, health_up_mult]
+	return TempMults.get_mults()
 
 
 func load_player(player_save: Dictionary) -> void:
 	# Load player base details from save dict
 	player_dict = player_save["player_dict"]
-	# These two might be pointless and could be gotten directly from the dict
-	_max_health = player_save["max_health"]
-	_move_speed = player_save["move_speed"]
 	# Load the modifiers from the save dict for easier access
 	set_permanent_attack_modifiers(player_save["permanent_attack_modifiers"])
 	set_permanent_speed_modifiers(player_save["permanent_speed_modifiers"])
@@ -101,12 +72,20 @@ func load_player(player_save: Dictionary) -> void:
 
 func save_player() -> Dictionary:
 	var save_dict: Dictionary = {}
+	player_dict["attack"] = attack
+	player_dict["level"] = _player_level
+	player_dict["experience"] = _experience
+	player_dict["total_experience"] = _total_exp
 	save_dict["player_dict"] = player_dict
 	save_dict["permanent_attack_modifiers"] = get_permanent_attack_modifiers()
 	save_dict["permanent_speed_modifiers"] = get_permanent_speed_modifiers()
 	save_dict["permanent_health_modifiers"] = get_permanent_health_modifiers()
 	return save_dict
 
+func save_shit() -> void:
+	var save_game = FileAccess.open("res://savegame.json", FileAccess.WRITE)
+	var save_string = JSON.stringify(save_player())
+	save_game.store_line(save_string)
 
 func restart_player() -> void:
 	_health = 10

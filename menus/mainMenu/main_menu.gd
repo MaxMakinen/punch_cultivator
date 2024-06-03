@@ -37,3 +37,9 @@ func _unpause() -> void:
 	owner.get_tree().paused = false
 	hide()
 
+
+
+func _on_save_button_pressed() -> void:
+	PlayerData.save_shit()
+	print("SAVED GAME")
+	pass # Replace with function body.
