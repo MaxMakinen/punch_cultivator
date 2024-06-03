@@ -23,7 +23,7 @@ var punch: Dictionary = {
 	"critical_chance" : 0.1,
 }
 
-var attack: Dictionary = {
+var attack_dict: Dictionary = {
 	"name" : "punch",
 	"damage" : 10.0,
 	"type" : ["physical"],
@@ -35,10 +35,6 @@ var attack: Dictionary = {
 	"combo_max" : 2,
 }
 
-
-var temp_multipliers: Dictionary = {
-	"increase damage" : 0.1,
-}
 
 
 signal level_up()
@@ -100,12 +96,13 @@ func calculate_damage(attack: Dictionary, target: Node2D) -> float:
 	var perm_modifier : float = 0.0
 	var temp_multiplier : float = 1.0
 	if not target.is_in_group("player"):
-		var perm_modifiers : Dictionary = PlayerData.get_permanent_attack_modifiers()
-		var temp_multipliers : Dictionary = PlayerData.get_temporary_attack_multipliers()
+		var perm_modifiers : Array = PlayerData.get_permanent_attack_modifiers()
+		var temp_multipliers : Array = PlayerData.get_temporary_attack_multipliers()
 		for modifier in perm_modifiers:
 			perm_modifier += modifier["effect"]
 		for multiplier in temp_multipliers:
-			temp_multiplier += multiplier["effect"]
+			if multiplier["type"] == "attack":
+				temp_multiplier += multiplier["multiplier"]
 
 	return (base_damage + perm_modifier) * temp_multiplier
 
