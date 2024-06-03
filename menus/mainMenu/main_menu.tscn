@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://budvs8frv4384"]
+[gd_scene load_steps=4 format=3 uid="uid://budvs8frv4384"]
+
+[ext_resource type="Script" path="res://menus/mainMenu/main_menu.gd" id="1_6icct"]
+[ext_resource type="Script" path="res://menus/mainMenu/ParallaxBackground.gd" id="2_cxptl"]
+[ext_resource type="Texture2D" uid="uid://c37f2ljubnf8s" path="res://assets/back.png" id="2_eitur"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +11,67 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6icct")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_cxptl")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1151, 0)
+
+[node name="BG" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1151.0
+offset_bottom = 646.0
+texture = ExtResource("2_eitur")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.5
+offset_top = -96.0
+offset_right = 160.5
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MAIN MENU"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="LoadButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="QuitButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
