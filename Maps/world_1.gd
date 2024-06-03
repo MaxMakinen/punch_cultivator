@@ -16,7 +16,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 
-@export var time: int = 30
+@export var time: int = 5
 
 @onready var cooldown: Label = $Camera2D/UIRoot/Cooldown
 @onready var cooldown_2: Label = $Camera2D/UIRoot/Cooldown2
@@ -79,3 +79,7 @@ func _get_time() -> String:
 func _leveling_up() -> void:
 	get_tree().paused = true
 	level_up.show()
+
+# Level has been won, Switch to win screen
+func _on_level_timer_timeout() -> void:
+	pass # Replace with function body.

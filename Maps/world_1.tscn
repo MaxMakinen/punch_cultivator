@@ -555,4 +555,5 @@ offset_bottom = -104.0
 offset_left = 494.0
 offset_right = 494.0
 
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

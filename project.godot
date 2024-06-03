@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Punch Cultivator"
-run/main_scene="res://Maps/world_1.tscn"
+run/main_scene="res://menus/mainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/icon.svg"
 
