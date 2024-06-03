@@ -1,11 +1,46 @@
 {
-	"permanent_attack_modifiers": [],
-	"permanent_health_modifiers": [],
-	"permanent_speed_modifiers": [],
+	"permanent_attack_modifiers": [
+		{
+			"ID": "combo_up_mod",
+			"description": "Increase max combo by 1",
+			"family": "attack",
+			"modifier": 1,
+			"name": "Determination",
+			"type": "combo"
+		},
+		{
+			"ID": "combo_up_mod",
+			"description": "Increase max combo by 1",
+			"family": "attack",
+			"modifier": 1,
+			"name": "Determination",
+			"type": "combo"
+		}
+	],
+	"permanent_health_modifiers": [
+		{
+			"ID": "health_up_mod",
+			"description": "Increase health by 5 HP",
+			"family": "health",
+			"modifier": 5,
+			"name": "Perseverance",
+			"type": "health"
+		}
+	],
+	"permanent_speed_modifiers": [
+		{
+			"ID": "speed_up_mod",
+			"description": "Movement speed boost by 50",
+			"family": "speed",
+			"modifier": 50,
+			"name": "Swiftness",
+			"type": "move_speed"
+		}
+	],
 	"player_dict": {
 		"attack": {
 			"combo_cooldown": 0.3,
-			"combo_max": 2,
+			"combo_max": 7,
 			"cooldown": 1,
 			"critical_chance": 0.1,
 			"damage": 10,
@@ -16,8 +51,8 @@
 				"physical"
 			]
 		},
-		"experience": 0,
-		"level": 0,
-		"total_experience": 0
+		"experience": 88,
+		"level": 6,
+		"total_experience": 297
 	}
 }

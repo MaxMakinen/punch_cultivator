@@ -16,3 +16,8 @@ func _ready() -> void:
 
 func _update_upgrade_description(description: String) -> void:
 	mod_description.text = description
+
+
+func _on_retire_button_pressed() -> void:
+	print("Retire ya boy")
+	pass # Replace with function body.

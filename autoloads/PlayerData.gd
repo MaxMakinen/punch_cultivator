@@ -36,6 +36,8 @@ var _experience = 0
 var _player_level = 0
 var _level_up_at = 10
 
+
+
 var _permanent_attack_modifiers: Array = []
 var _permanent_speed_modifiers: Array = []
 var _permanent_health_modifiers: Array = []

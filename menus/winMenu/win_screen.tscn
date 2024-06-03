@@ -68,3 +68,14 @@ size_flags_horizontal = 3
 text = "Boost Information"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="HonorLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Honor Total"
+horizontal_alignment = 1
+
+[node name="RetireButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Retire Disciple"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RetireButton" to="." method="_on_retire_button_pressed"]
