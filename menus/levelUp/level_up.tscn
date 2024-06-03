@@ -59,24 +59,22 @@ alignment = 1
 layout_mode = 2
 text = "Level Up"
 
-[node name="UpgradeCooldown" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
+[node name="Button1" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade Cooldown"
 
-[node name="UpgradeSpeed" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
+[node name="Button2" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade Attack Speed"
 
-[node name="UpgradeCombo" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
+[node name="Button3" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade Max Combo"
 
-[node name="UpgradeComboSpeed" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
+[node name="Button4" type="Button" parent="MarginContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Upgrade Combo Speed"
+text = "UNUSED"
 
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCooldown" to="." method="_on_upgrade_cooldown_pressed"]
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCooldown" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeSpeed" to="." method="_on_upgrade_speed_pressed"]
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeCombo" to="." method="_on_upgrade_combo_pressed"]
-[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/UpgradeComboSpeed" to="." method="_on_upgrade_combo_speed_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
