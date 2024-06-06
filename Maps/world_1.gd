@@ -34,6 +34,7 @@ func _ready() -> void:
 	level_timer.start(time * 60)
 	weapon = player.get_weapon()
 	progress_bar.max_value = weapon.get_max_cooldown()
+	PlayerData.restart_player()
 
 
 func _process(_delta: float) -> void:
@@ -83,4 +84,4 @@ func _leveling_up() -> void:
 # Level has been won, Switch to win screen
 func _on_level_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://menus/winMenu/win_screen.tscn")
-	pass # Replace with function body.
+
