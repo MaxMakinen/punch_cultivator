@@ -84,10 +84,12 @@ func save_player() -> Dictionary:
 	save_dict["permanent_health_modifiers"] = get_permanent_health_modifiers()
 	return save_dict
 
+
 func save_shit() -> void:
 	var save_game = FileAccess.open("res://savegame.json", FileAccess.WRITE)
 	var save_string = JSON.stringify(save_player())
 	save_game.store_line(save_string)
+
 
 func restart_player() -> void:
 	_health = _max_health
